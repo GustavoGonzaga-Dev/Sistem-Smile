@@ -2,6 +2,7 @@ public class Funcionario {
 
     private String nome;
     private String email;
+    private String confEmail;
     private long codigo;
     private String permissao;
     private String senha;
@@ -22,6 +23,10 @@ public class Funcionario {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getConfEmail() { return confEmail; }
+
+    public void setConfEmail(String confEmail) { this.confEmail = confEmail; }
 
     public long getCodigo() {
         return codigo;
