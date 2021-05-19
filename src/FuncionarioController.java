@@ -27,6 +27,15 @@ public class FuncionarioController extends Component {
         }
     }
 
+    public void alterar (Funcionario Fn){
+        for (Funcionario Fn2 : funcionarios){
+            if(Fn2.getCodigo() == Fn.getCodigo()){
+                funcionarios.remove(Fn2);
+                funcionarios.add(Fn);
+            }
+        }
+    }
+
     public boolean validarCampos(String txtNome, String txtEmail, String txtConfEmail, String txtCodigo, String cbPermissao, String txtSenha, String txtconfSenha){
         List<String> lista = new ArrayList<>();
         lista.add(0, txtNome);
@@ -53,6 +62,4 @@ public class FuncionarioController extends Component {
         }
         return false;
     }
-
-
 }
