@@ -1,0 +1,6 @@
+.text-field{
+    -fx-min-width: 220;
+}
+.label{
+    -fx-font-size: 10;
+}
