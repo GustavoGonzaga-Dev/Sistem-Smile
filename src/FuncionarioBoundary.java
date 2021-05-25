@@ -30,8 +30,10 @@ public class FuncionarioBoundary extends Application {
     private Button btnExcluir = new Button("Excluir");
     private Button btnAlterar = new Button("Alterar");
     private Button btnConcluir = new Button("Concluir");
+    private Button btnCancelar = new Button("Cancelar");
 
     private boolean valido = false;
+    private boolean valido2 = false;
     private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
     private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
 
@@ -39,6 +41,7 @@ public class FuncionarioBoundary extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        control.admin();
         Pane pPane = new Pane();
         Scene scCeneFuncionario = new Scene(pPane, 500, 330);
 
@@ -97,14 +100,16 @@ public class FuncionarioBoundary extends Application {
         btnConcluir.relocate(220, 280);
         btnExcluir.relocate(180, 280);
         btnExcluir.getStylesheets().add(FuncionarioBoundary.class.getResource("btnExcluirStyle.css").toExternalForm());
+        btnCancelar.relocate(180, 280);
 
-        pPane.getChildren().addAll(lblNome, txtNome, lblEmail, txtEmail, lblConfEmail, txtConfEmail, lblCodigo, txtCodigo, lblPermissao,
-                cbPermissao, btnAdd, btnPesq, btnExcluir, btnAlterar, btnConcluir, lblSenha, txtSenha, lblConfSenha, txtConfSenha,
-                btnCarregarImagem, lblImg, lblTextoPesq, lblTextoAlt, lblTextoEx);
+        pPane.getChildren().addAll(lblNome, txtNome, lblEmail, txtEmail, lblConfEmail, txtConfEmail, lblCodigo, txtCodigo,
+                lblPermissao, cbPermissao, btnAdd, btnPesq, btnExcluir, btnAlterar, btnConcluir, btnCancelar, lblSenha,
+                txtSenha, lblConfSenha, txtConfSenha, btnCarregarImagem, lblImg, lblTextoPesq, lblTextoAlt, lblTextoEx);
 
         btnExcluir.setVisible(false);
         btnAlterar.setVisible(false);
         btnConcluir.setVisible(false);
+        btnCancelar.setVisible(false);
         lblTextoAlt.setVisible(false);
         lblTextoEx.setVisible(false);
 
@@ -117,23 +122,59 @@ public class FuncionarioBoundary extends Application {
         });
 
         btnAdd.setOnAction((e)->{
-            valido = control.validarCampos(txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(), txtCodigo.getText(),
-                    cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
-            control.adicionar(boundaryToEntity());
-            this.entityToBoundary(new Funcionario());
-            alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
-            alertMess.showAndWait();
+            try{
+                valido = control.validarCampos(txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(), txtCodigo.getText(),
+                        cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
+                control.adicionar(boundaryToEntity());
+                this.entityToBoundary(new Funcionario());
+                if(valido){
+                    alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
+                    alertMess.showAndWait();
+                }
+            }catch (Exception e1){
+                alertWarn.setHeaderText("PREENCHA TODOS OS CAMPOS CORRETAMENTE!");
+                alertWarn.showAndWait();
+            }
+
         });
 
         btnPesq.setOnAction((e)->{
             Funcionario Fn = control.pesquisarPorCodigo(Long.parseLong(txtCodigo.getText()));
             this.entityToBoundary(Fn);
-            if(Fn != null){
+            if(Fn != null && txtCodigo.getText().equals("0")){
+                txtNome.setEditable(false);
+                txtEmail.setEditable(false);
+                txtConfEmail.setEditable(false);
+                cbPermissao.setDisable(true);
+                txtSenha.setEditable(false);
+                txtConfSenha.setEditable(false);
+                btnAdd.setVisible(false);
+                btnCancelar.setVisible(true);
+            } else if(Fn != null){
+                txtNome.setEditable(false);
+                txtEmail.setEditable(false);
+                txtConfEmail.setEditable(false);
+                cbPermissao.setDisable(true);
+                txtSenha.setEditable(false);
+                txtConfSenha.setEditable(false);
                 lblTextoEx.setVisible(true);
                 btnAdd.setVisible(false);
                 btnAlterar.setVisible(true);
                 btnExcluir.setVisible(true);
+                btnCancelar.setVisible(false);
             }
+        });
+
+        btnCancelar.setOnAction((e)->{
+            this.entityToBoundary(new Funcionario());
+            btnAdd.setVisible(true);
+            btnCancelar.setVisible(false);
+            txtNome.setEditable(true);
+            txtEmail.setEditable(true);
+            txtConfEmail.setEditable(true);
+            cbPermissao.setDisable(false);
+            txtSenha.setEditable(true);
+            txtConfSenha.setEditable(true);
         });
 
         btnExcluir.setOnAction((e)->{
@@ -147,6 +188,13 @@ public class FuncionarioBoundary extends Application {
                 btnAdd.setVisible(true);
                 btnAlterar.setVisible(false);
                 btnExcluir.setVisible(false);
+
+                txtNome.setEditable(true);
+                txtEmail.setEditable(true);
+                txtConfEmail.setEditable(true);
+                cbPermissao.setDisable(false);
+                txtSenha.setEditable(true);
+                txtConfSenha.setEditable(true);
             }catch (Exception e1){
                 alertWarn.setHeaderText("Preencha o campo de (CODIGO) corretamente!");
                 alertWarn.showAndWait();
@@ -162,20 +210,28 @@ public class FuncionarioBoundary extends Application {
             btnAlterar.setVisible(false);
             btnPesq.setVisible(false);
             txtCodigo.setEditable(false);
+            txtNome.setEditable(true);
+            txtEmail.setEditable(true);
+            txtConfEmail.setEditable(true);
+            cbPermissao.setDisable(false);
+            txtSenha.setEditable(true);
+            txtConfSenha.setEditable(true);
         });
 
         btnConcluir.setOnAction((e)->{
             valido = control.validarCampos(txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(), txtCodigo.getText(),
                     cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
-            control.alterar(boundaryToEntity());
-            this.entityToBoundary(new Funcionario());
-            alertMess.setHeaderText("ALTERADO COM SUCESSO!");
-            alertMess.showAndWait();
-            btnConcluir.setVisible(false);
-            btnExcluir.setVisible(false);
-            btnAdd.setVisible(true);
-            btnPesq.setVisible(true);
-            txtCodigo.setEditable(true);
+            valido2 = control.alterar(boundaryToEntity());
+            if(valido2) {
+                this.entityToBoundary(new Funcionario());
+                alertMess.setHeaderText("ALTERADO COM SUCESSO!");
+                alertMess.showAndWait();
+                btnConcluir.setVisible(false);
+                btnExcluir.setVisible(false);
+                btnAdd.setVisible(true);
+                btnPesq.setVisible(true);
+                txtCodigo.setEditable(true);
+            }
         });
 
         stage.setScene(scCeneFuncionario);

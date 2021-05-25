@@ -27,13 +27,15 @@ public class FuncionarioController extends Component {
         }
     }
 
-    public void alterar (Funcionario Fn){
+    public boolean alterar (Funcionario Fn){
         for (Funcionario Fn2 : funcionarios){
             if(Fn2.getCodigo() == Fn.getCodigo()){
                 funcionarios.remove(Fn2);
                 funcionarios.add(Fn);
+                return true;
             }
         }
+        return false;
     }
 
     public boolean validarCampos(String txtNome, String txtEmail, String txtConfEmail, String txtCodigo, String cbPermissao, String txtSenha, String txtconfSenha){
@@ -61,5 +63,17 @@ public class FuncionarioController extends Component {
             return true;
         }
         return false;
+    }
+
+    public void admin() {
+        Funcionario Fn = new Funcionario();
+        Fn.setNome("ADMIN");
+        Fn.setEmail("ADMIN@ADMIIN.COM");
+        Fn.setConfEmail("ADMIN@ADMIIN.COM");
+        Fn.setSenha("ADMIN1234");
+        Fn.setConfSenha("ADMIN1234");
+        Fn.setCodigo(0);
+        Fn.setPermissao("MASTER");
+        adicionar(Fn);
     }
 }
