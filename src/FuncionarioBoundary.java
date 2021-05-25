@@ -19,10 +19,10 @@ public class FuncionarioBoundary extends Application {
     private TextField txtSenha = new TextField();
     private TextField txtConfSenha = new TextField();
 
-    private Label lblImg = new Label();
+    private Label lblImg = new Label("Carregar imagem\n(ainda não funciona)");
 
     private ComboBox<String> cbPermissao = new ComboBox<>();
-    private String perm[] = { "Master", "Comum"};
+    private String perm[] = { "MASTER", "COMUM"};
 
     private Button btnCarregarImagem = new Button("Carregar imagem");
     private Button btnAdd = new Button("Adicionar");
@@ -83,8 +83,9 @@ public class FuncionarioBoundary extends Application {
         lblPermissao.relocate(230, 153);
         cbPermissao.relocate(340, 150);
 
-        lblImg.relocate(0,0);
-        btnCarregarImagem.relocate(20, 100);
+        lblImg.relocate(23,40);
+        lblImg.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
+        btnCarregarImagem.relocate(18, 80);
 
         btnAlterar.relocate(250, 280);
         btnAdd.relocate(180, 280);
@@ -102,6 +103,8 @@ public class FuncionarioBoundary extends Application {
         btnAlterar.setVisible(false);
         btnConcluir.setVisible(false);
         btnCancelar.setVisible(false);
+        btnCarregarImagem.setDisable(true);
+        lblImg.setDisable(true);
 
         btnCarregarImagem.setOnAction((e)->{
             FileChooser fil_chooser = new FileChooser();
@@ -230,7 +233,7 @@ public class FuncionarioBoundary extends Application {
                 txtCodigo.setEditable(true);
                 lblTextoPesq.setVisible(true);
             } else{
-                alertWarn.setHeaderText("Preencha o campo de (CODIGO) corretamente!");
+                alertWarn.setHeaderText("Preencha os campos corretamente!");
                 alertWarn.showAndWait();
             }
         });
