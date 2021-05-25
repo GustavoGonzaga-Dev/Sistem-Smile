@@ -19,23 +19,21 @@ public class FuncionarioController extends Component {
         return  null;
     }
 
-    public void excluirPorCodigo(long codigo){
-        for (Funcionario Fn : funcionarios){
-            if(Fn.getCodigo() == codigo){
-                funcionarios.remove(Fn);
+    public void excluir(Funcionario Fn){
+        for (Funcionario Fn3 : funcionarios){
+            if(Fn3.getCodigo() == Fn.getCodigo()){
+                funcionarios.remove(Fn3);
             }
         }
     }
 
-    public boolean alterar (Funcionario Fn){
+    public void alterar (Funcionario Fn){
         for (Funcionario Fn2 : funcionarios){
             if(Fn2.getCodigo() == Fn.getCodigo()){
                 funcionarios.remove(Fn2);
                 funcionarios.add(Fn);
-                return true;
             }
         }
-        return false;
     }
 
     public boolean validarCampos(String txtNome, String txtEmail, String txtConfEmail, String txtCodigo, String cbPermissao, String txtSenha, String txtconfSenha){
