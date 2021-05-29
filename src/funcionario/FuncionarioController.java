@@ -1,9 +1,6 @@
 package funcionario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,12 +45,34 @@ public class FuncionarioController {
     }
 
     public Funcionario pesquisarPorCodigo(long codigo){
-        for (Funcionario Fn : funcionarios){
+ /*       for (Funcionario Fn : funcionarios){
             if(Fn.getCodigo() == codigo){
                 return Fn;
             }
+        }*/
+        funcionarios.clear();
+
+        try (Connection conection = DriverManager.getConnection(URL, USER, PASSWORD)){
+                String sql = "SELECT * FROM FUNCIONARIO WHERE CODIGO LIKE ?";
+                PreparedStatement stmt = conection.prepareStatement(sql);
+                stmt.setLong(1, codigo );
+                ResultSet result = stmt.executeQuery();
+                while(result.next()){
+                    Funcionario Fn = new Funcionario();
+                    Fn.setCodigo(result.getLong("CODIGO"));
+                    Fn.setNome(result.getString("NOME"));
+                    Fn.setEmail(result.getString("EMAIL"));
+                    Fn.setConfEmail(result.getString("CONFIRMA_EMAIL"));
+                    Fn.setPermissao(result.getString("PERMISSAO"));
+                    Fn.setSenha(result.getString("SENHA"));
+                    Fn.setConfSenha(result.getString("CONFIRMA_SENHA"));
+                    funcionarios.add(Fn);
+                    return Fn;
+                }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
-        return  null;
+       return null;
     }
 
     public void excluir(Funcionario Fn){
@@ -99,4 +118,6 @@ public class FuncionarioController {
         }
         return false;
     }
+
+
 }
