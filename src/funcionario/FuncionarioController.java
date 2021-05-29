@@ -45,12 +45,6 @@ public class FuncionarioController {
     }
 
     public Funcionario pesquisarPorCodigo(long codigo){
-        /*for (Funcionario Fn : funcionarios){
-            if(Fn.getCodigo() == codigo){
-                return Fn;
-            }
-        }*/
-
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "SELECT * FROM funcionario WHERE codigo LIKE ?";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -75,10 +69,13 @@ public class FuncionarioController {
     }
 
     public void excluir(Funcionario Fn){
-        for (Funcionario Fn3 : funcionarios){
-            if(Fn3.getCodigo() == Fn.getCodigo()){
-                funcionarios.remove(Fn3);
-            }
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "DELETE FROM funcionario WHERE codigo LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1,  Fn.getCodigo());
+            ResultSet rs = stmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -91,31 +88,28 @@ public class FuncionarioController {
         }
     }
 
-    public boolean validarCampos(String txtNome, String txtEmail, String txtConfEmail, String txtCodigo, String cbPermissao, String txtSenha, String txtconfSenha){
+    public boolean validarCampos(String txtCodigo, String txtNome, String txtEmail, String txtConfEmail, String cbPermissao, String txtSenha, String txtConfSenha){
         List<String> lista = new ArrayList<>();
-        lista.add(0, txtNome);
-        lista.add(1, txtEmail);
-        lista.add(2, txtConfEmail);
-        lista.add(3, txtCodigo);
+        lista.add(0, txtCodigo);
+        lista.add(1, txtNome);
+        lista.add(2, txtEmail);
+        lista.add(3, txtConfEmail);
         lista.add(4, cbPermissao);
         lista.add(5, txtSenha);
-        lista.add(6, txtconfSenha);
+        lista.add(6, txtConfSenha);
 
         for (String l : lista) {
-            if (l.equals(null) || l.equals("")){
+            if (l == null || l.equals("")){
                 lista.clear();
                 return false;
             }
         }
         lista.clear();
-        return validarEmailSenha(txtEmail, txtConfEmail, txtSenha, txtconfSenha);
+        return validarEmailSenha(txtEmail, txtConfEmail, txtSenha, txtConfSenha);
     }
 
-    public boolean validarEmailSenha(String txtEmail, String txtConfEmail, String txtsenha, String txtconfSenha){
-        if (txtsenha.equals(txtconfSenha) && txtEmail.equals(txtConfEmail)){
-            return true;
-        }
-        return false;
+    public boolean validarEmailSenha(String txtEmail, String txtConfEmail, String txtSenha, String txtConfSenha){
+        return txtSenha.equals(txtConfSenha) && txtEmail.equals(txtConfEmail);
     }
 
     public void admin() {
