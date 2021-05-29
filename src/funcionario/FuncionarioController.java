@@ -45,10 +45,31 @@ public class FuncionarioController {
     }
 
     public Funcionario pesquisarPorCodigo(long codigo){
-        for (Funcionario Fn : funcionarios){
+        /*for (Funcionario Fn : funcionarios){
             if(Fn.getCodigo() == codigo){
                 return Fn;
             }
+        }*/
+
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "SELECT * FROM funcionario WHERE codigo LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1,  codigo);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Funcionario Fn = new Funcionario();
+                Fn.setCodigo(rs.getLong("codigo"));
+                Fn.setNome(rs.getString("nome"));
+                Fn.setEmail(rs.getString("email"));
+                Fn.setConfEmail(rs.getString("confirma_email"));
+                Fn.setPermissao(rs.getString("permissao"));
+                Fn.setSenha(rs.getString("senha"));
+                Fn.setConfSenha(rs.getString("confirma_senha"));
+
+                return Fn;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return  null;
     }
