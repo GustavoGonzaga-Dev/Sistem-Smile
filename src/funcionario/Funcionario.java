@@ -1,7 +1,7 @@
 package funcionario;
 
 public class Funcionario {
-
+//  Essa é do Japinha
     private String nome;
     private String email;
     private String confEmail;
