@@ -224,7 +224,7 @@ public class FuncionarioBoundary extends Application {
         });
 
         btnConcluir.setOnAction((e)->{
-            valido = control.validarCampos(txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(), txtCodigo.getText(),
+            valido = control.validarCampos(txtCodigo.getText(), txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(),
                     cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
             if(valido) {
                 control.alterar(boundaryToEntity());
