@@ -1,13 +1,50 @@
-import java.awt.*;
+package funcionario;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncionarioController extends Component {
+public class FuncionarioController {
 
     private List<Funcionario> funcionarios = new ArrayList<>();
 
+    public static final String URL = "jdbc:mariadb://localhost:3306/LOJA";
+    public static final String USER = "root";
+    public static final String PASSWORD = "";
+
+    public Connection con;
+
+    public Connection conectarbanco(){
+        try{
+            con = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Conectado no banco de dados");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return con;
+    }
+
     public void adicionar (Funcionario Fn){
         funcionarios.add(Fn);
+        try{
+            String sql = "INSERT INTO FUNCIONARIO" +
+                    "(CODIGO, NOME, EMAIL, CONFIRMA_EMAIL, PERMISSAO, SENHA, CONFIRMA_SENHA) VALUES" +
+                    "(?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, Fn.getCodigo());
+            stmt.setString(2, Fn.getNome());
+            stmt.setString(3, Fn.getEmail());
+            stmt.setString(4, Fn.getConfEmail());
+            stmt.setString(5, Fn.getPermissao());
+            stmt.setString(6, Fn.getSenha());
+            stmt.setString(7, Fn.getConfSenha());
+            stmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public Funcionario pesquisarPorCodigo(long codigo){
@@ -61,17 +98,5 @@ public class FuncionarioController extends Component {
             return true;
         }
         return false;
-    }
-
-    public void admin() {
-        Funcionario Fn = new Funcionario();
-        Fn.setNome("ADMIN");
-        Fn.setEmail("ADMIN@ADMIIN.COM");
-        Fn.setConfEmail("ADMIN@ADMIIN.COM");
-        Fn.setSenha("ADMIN1234");
-        Fn.setConfSenha("ADMIN1234");
-        Fn.setCodigo(0);
-        Fn.setPermissao("MASTER");
-        adicionar(Fn);
     }
 }
