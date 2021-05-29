@@ -1,9 +1,6 @@
 package funcionario;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,5 +95,28 @@ public class FuncionarioController {
             return true;
         }
         return false;
+    }
+
+    public void admin() {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "SELECT * FROM funcionario WHERE codigo LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, 0 );
+            ResultSet rs = stmt.executeQuery();
+            System.out.println(rs.first());
+            if(rs.first() == false){
+                Funcionario Fn = new Funcionario();
+                Fn.setNome("ADMIN");
+                Fn.setEmail("ADMIN@ADMIIN.COM");
+                Fn.setConfEmail("ADMIN@ADMIIN.COM");
+                Fn.setSenha("ADMIN1234");
+                Fn.setConfSenha("ADMIN1234");
+                Fn.setCodigo(0);
+                Fn.setPermissao("MASTER");
+                adicionar(Fn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
