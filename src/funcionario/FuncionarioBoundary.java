@@ -119,7 +119,7 @@ public class FuncionarioBoundary extends Application {
 
         btnAdd.setOnAction((e)->{
             try{
-                valido = control.validarCampos(txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(), txtCodigo.getText(),
+                valido = control.validarCampos(txtCodigo.getText(), txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(),
                         cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
                 if(valido){
                     control.adicionar(boundaryToEntity());
@@ -149,6 +149,7 @@ public class FuncionarioBoundary extends Application {
                 lblTextoPesq.setVisible(false);
                 btnCancelar.setVisible(true);
             }else if(Fn != null){
+                valido = control.validarEmailSenha(txtEmail.getText(), txtConfEmail.getText(), txtSenha.getText(), txtConfSenha.getText());
                 btnPesq.setVisible(false);
                 txtCodigo.setEditable(false);
                 txtNome.setEditable(false);
@@ -187,6 +188,7 @@ public class FuncionarioBoundary extends Application {
             try {
                 control.excluir(boundaryToEntity());
             }catch (Exception e1){
+                e1.printStackTrace();
             }
             alertMess.setHeaderText("Funcionario excluido!");
             alertMess.showAndWait();
