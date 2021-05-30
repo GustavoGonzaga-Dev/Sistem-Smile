@@ -24,7 +24,7 @@ public class FuncionarioBoundary extends Application {
     private Label lblImg = new Label("Carregar imagem\n(ainda não funciona)");
 
     private ComboBox<String> cbPermissao = new ComboBox<>();
-    private String perm[] = { "MASTER", "COMUM"};
+    private String perm[] = {"MASTER", "COMUM"};
 
     private Button btnCarregarImagem = new Button("Carregar imagem");
     private Button btnAdd = new Button("Adicionar");
@@ -86,7 +86,7 @@ public class FuncionarioBoundary extends Application {
         lblPermissao.relocate(230, 153);
         cbPermissao.relocate(340, 150);
 
-        lblImg.relocate(23,40);
+        lblImg.relocate(23, 40);
         lblImg.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
         btnCarregarImagem.relocate(18, 80);
 
@@ -109,7 +109,7 @@ public class FuncionarioBoundary extends Application {
         btnCarregarImagem.setDisable(true);
         lblImg.setDisable(true);
 
-        btnCarregarImagem.setOnAction((e)->{
+        btnCarregarImagem.setOnAction((e) -> {
             FileChooser fil_chooser = new FileChooser();
             File file = fil_chooser.showOpenDialog(stage);
             if (file != null) {
@@ -117,26 +117,26 @@ public class FuncionarioBoundary extends Application {
             }
         });
 
-        btnAdd.setOnAction((e)->{
-            try{
+        btnAdd.setOnAction((e) -> {
+            try {
                 valido = control.validarCampos(txtCodigo.getText(), txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(),
                         cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
-                if(valido){
+                if (valido) {
                     control.adicionar(boundaryToEntity());
                     this.entityToBoundary(new Funcionario());
                     alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
                     alertMess.showAndWait();
                 }
-            }catch (Exception e1){
+            } catch (Exception e1) {
                 alertWarn.setHeaderText("PREENCHA TODOS OS CAMPOS CORRETAMENTE!");
                 alertWarn.showAndWait();
             }
         });
 
-        btnPesq.setOnAction((e)->{
+        btnPesq.setOnAction((e) -> {
             Funcionario Fn = control.pesquisarPorCodigo(Long.parseLong(txtCodigo.getText()));
             this.entityToBoundary(Fn);
-            if(Fn != null && txtCodigo.getText().equals("0")){
+            if (Fn != null && txtCodigo.getText().equals("0")) {
                 txtNome.setEditable(false);
                 txtEmail.setEditable(false);
                 txtConfEmail.setEditable(false);
@@ -148,7 +148,7 @@ public class FuncionarioBoundary extends Application {
                 txtCodigo.setEditable(false);
                 lblTextoPesq.setVisible(false);
                 btnCancelar.setVisible(true);
-            }else if(Fn != null){
+            } else if (Fn != null) {
                 valido = control.validarEmailSenha(txtEmail.getText(), txtConfEmail.getText(), txtSenha.getText(), txtConfSenha.getText());
                 btnPesq.setVisible(false);
                 txtCodigo.setEditable(false);
@@ -167,7 +167,7 @@ public class FuncionarioBoundary extends Application {
             }
         });
 
-        btnCancelar.setOnAction((e)->{
+        btnCancelar.setOnAction((e) -> {
             this.entityToBoundary(new Funcionario());
             btnAdd.setVisible(true);
             btnPesq.setVisible(true);
@@ -184,10 +184,10 @@ public class FuncionarioBoundary extends Application {
             lblTextoPesq.setVisible(true);
         });
 
-        btnExcluir.setOnAction((e)->{
+        btnExcluir.setOnAction((e) -> {
             try {
                 control.excluir(boundaryToEntity());
-            }catch (Exception e1){
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
             alertMess.setHeaderText("Funcionario excluido!");
@@ -208,7 +208,7 @@ public class FuncionarioBoundary extends Application {
             lblTextoPesq.setVisible(true);
         });
 
-        btnAlterar.setOnAction((e)->{
+        btnAlterar.setOnAction((e) -> {
             lblTextoPesq.setVisible(false);
             btnConcluir.setVisible(true);
             btnExcluir.setVisible(false);
@@ -223,10 +223,10 @@ public class FuncionarioBoundary extends Application {
             btnCancelar.setVisible(false);
         });
 
-        btnConcluir.setOnAction((e)->{
+        btnConcluir.setOnAction((e) -> {
             valido = control.validarCampos(txtCodigo.getText(), txtNome.getText(), txtEmail.getText(), txtConfEmail.getText(),
                     cbPermissao.getValue(), txtSenha.getText(), txtConfSenha.getText());
-            if(valido) {
+            if (valido) {
                 control.alterar(boundaryToEntity());
                 this.entityToBoundary(new Funcionario());
                 alertMess.setHeaderText("ALTERADO COM SUCESSO!");
@@ -237,7 +237,7 @@ public class FuncionarioBoundary extends Application {
                 btnPesq.setVisible(true);
                 txtCodigo.setEditable(true);
                 lblTextoPesq.setVisible(true);
-            } else{
+            } else {
                 alertWarn.setHeaderText("Preencha os campos corretamente!");
                 alertWarn.showAndWait();
             }
@@ -262,7 +262,7 @@ public class FuncionarioBoundary extends Application {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
+        } else {
             alertWarn.setHeaderText("PREENCHA TODOS OS CAMPOS CORRETAMENTE!");
             alertWarn.showAndWait();
         }
@@ -278,7 +278,7 @@ public class FuncionarioBoundary extends Application {
             txtSenha.setText(Fn.getSenha());
             txtConfSenha.setText(Fn.getConfSenha());
             cbPermissao.setValue(Fn.getPermissao());
-        }else{
+        } else {
             alertMess.setHeaderText("FUNCIONARIO NÃO EXISTE.");
             alertMess.showAndWait();
         }
