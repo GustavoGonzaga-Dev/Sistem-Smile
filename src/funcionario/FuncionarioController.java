@@ -25,7 +25,7 @@ public class FuncionarioController {
     }
 
     public void adicionar (Funcionario Fn){
-        funcionarios.add(Fn);
+        //funcionarios.add(Fn);
         try{
             String sql = "INSERT INTO FUNCIONARIO" +
                     "(CODIGO, NOME, EMAIL, CONFIRMA_EMAIL, PERMISSAO, SENHA, CONFIRMA_SENHA) VALUES" +
@@ -45,13 +45,6 @@ public class FuncionarioController {
     }
 
     public Funcionario pesquisarPorCodigo(long codigo){
- /*       for (Funcionario Fn : funcionarios){
-            if(Fn.getCodigo() == codigo){
-                return Fn;
-            }
-        }*/
-        funcionarios.clear();
-
         try (Connection conection = DriverManager.getConnection(URL, USER, PASSWORD)){
                 String sql = "SELECT * FROM FUNCIONARIO WHERE CODIGO LIKE ?";
                 PreparedStatement stmt = conection.prepareStatement(sql);
@@ -66,7 +59,7 @@ public class FuncionarioController {
                     Fn.setPermissao(result.getString("PERMISSAO"));
                     Fn.setSenha(result.getString("SENHA"));
                     Fn.setConfSenha(result.getString("CONFIRMA_SENHA"));
-                    funcionarios.add(Fn);
+                    //funcionarios.add(Fn);
                     return Fn;
                 }
         }catch(SQLException e){
@@ -75,49 +68,73 @@ public class FuncionarioController {
        return null;
     }
 
-    public void excluir(Funcionario Fn){
-        for (Funcionario Fn3 : funcionarios){
-            if(Fn3.getCodigo() == Fn.getCodigo()){
-                funcionarios.remove(Fn3);
-            }
+    public void excluir(Funcionario Fn) {
+
+        try (Connection conection = DriverManager.getConnection(URL, USER, PASSWORD)){
+            String sql = "DELETE FROM FUNCIONARIO WHERE CODIGO LIKE ?";
+            PreparedStatement stmt = conection.prepareStatement(sql);
+            stmt.setLong(1, Fn.getCodigo() );
+            ResultSet result = stmt.executeQuery();
+        }catch(SQLException e){
+            e.printStackTrace();
         }
     }
 
     public void alterar (Funcionario Fn){
-        for (Funcionario Fn2 : funcionarios){
+        /*for (Funcionario Fn2 : funcionarios){
             if(Fn2.getCodigo() == Fn.getCodigo()){
                 funcionarios.remove(Fn2);
                 funcionarios.add(Fn);
             }
-        }
+        }*/
+
+
     }
 
-    public boolean validarCampos(String txtNome, String txtEmail, String txtConfEmail, String txtCodigo, String cbPermissao, String txtSenha, String txtconfSenha){
+    public boolean validarCampos(String txtCodigo, String txtNome, String txtEmail, String txtConfEmail, String cbPermissao, String txtSenha, String txtConfSenha){
         List<String> lista = new ArrayList<>();
-        lista.add(0, txtNome);
-        lista.add(1, txtEmail);
-        lista.add(2, txtConfEmail);
-        lista.add(3, txtCodigo);
+        lista.add(0, txtCodigo);
+        lista.add(1, txtNome);
+        lista.add(2, txtEmail);
+        lista.add(3, txtConfEmail);
         lista.add(4, cbPermissao);
         lista.add(5, txtSenha);
-        lista.add(6, txtconfSenha);
+        lista.add(6, txtConfSenha);
 
         for (String l : lista) {
-            if (l.equals(null) || l.equals("")){
+            if (l == null || l.equals("")){
                 lista.clear();
                 return false;
             }
         }
         lista.clear();
-        return validarEmailSenha(txtEmail, txtConfEmail, txtSenha, txtconfSenha);
+        return validarEmailSenha(txtEmail, txtConfEmail, txtSenha, txtConfSenha);
     }
 
-    public boolean validarEmailSenha(String txtEmail, String txtConfEmail, String txtsenha, String txtconfSenha){
-        if (txtsenha.equals(txtconfSenha) && txtEmail.equals(txtConfEmail)){
-            return true;
+    public boolean validarEmailSenha(String txtEmail, String txtConfEmail, String txtSenha, String txtConfSenha){
+        return txtSenha.equals(txtConfSenha) && txtEmail.equals(txtConfEmail);
+    }
+
+    public void admin() {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sql = "SELECT * FROM funcionario WHERE codigo LIKE ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, 0 );
+            ResultSet rs = stmt.executeQuery();
+            System.out.println(rs.first());
+            if(rs.first() == false){
+                Funcionario Fn = new Funcionario();
+                Fn.setNome("ADMIN");
+                Fn.setEmail("ADMIN@ADMIIN.COM");
+                Fn.setConfEmail("ADMIN@ADMIIN.COM");
+                Fn.setSenha("ADMIN1234");
+                Fn.setConfSenha("ADMIN1234");
+                Fn.setCodigo(0);
+                Fn.setPermissao("MASTER");
+                adicionar(Fn);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return false;
     }
-
-
 }
