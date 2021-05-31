@@ -49,10 +49,10 @@ public class LoginBoundary extends Application {
             permitido = LoginController.validarLogin(boundaryToEntity());
 
             if(permitido){
-                alertMess.setHeaderText("Email ta certo");
+                alertMess.setHeaderText("tudo certo, bora pro menu");
                 alertMess.showAndWait();
             }else{
-                alertWarn.setHeaderText("Email ta errado");
+                alertWarn.setHeaderText("ta errado");
                 alertWarn.showAndWait();
             }
         });

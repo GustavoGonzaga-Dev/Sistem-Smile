@@ -10,15 +10,18 @@ public class LoginController {
 
     public static boolean validarLogin(Login Lg) {
         try (Connection conLg = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String sqlLg = "SELECT * FROM funcionario WHERE codigo LIKE ?";
+            System.out.println(Lg.getEmail());
+            System.out.println(Lg.getSenha());
+            String sqlLg = "SELECT * FROM funcionario WHERE email LIKE ?";
             PreparedStatement stmtLg = conLg.prepareStatement(sqlLg);
             stmtLg.setString(1, Lg.getEmail());
             ResultSet rsLg = stmtLg.executeQuery();
-
-            if (rsLg.getString("email").equals(Lg.getEmail())) {
-                return true;
+            rsLg.next();
+            if (rsLg.first()) {
+                if (rsLg.getString("senha").equals(Lg.getSenha())) {
+                    return true;
+                }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
