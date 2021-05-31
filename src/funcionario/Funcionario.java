@@ -1,7 +1,7 @@
 package funcionario;
 
 public class Funcionario {
-//essa é do gugu
+/* essa é a master dia 31/05 o CRUD do funcionario funcionando Linkado com o Banco de Dados*/
     private String nome;
     private String email;
     private String confEmail;
