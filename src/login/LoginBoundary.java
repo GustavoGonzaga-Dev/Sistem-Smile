@@ -25,6 +25,12 @@ public class LoginBoundary extends Application {
 
     private boolean permitido = false;
 
+    //private FuncionarioBoundary funcTela = new FuncionarioBoundary();
+
+    public static void main(String[] args) {
+        Application.launch(LoginBoundary.class, args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Pane pPane = new Pane();
@@ -51,6 +57,13 @@ public class LoginBoundary extends Application {
             if(permitido){
                 alertMess.setHeaderText("tudo certo, bora pro menu");
                 alertMess.showAndWait();
+                try {
+                    Stage stage = new Stage();
+                    primaryStage.close();
+                    //funcTela.start(stage);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }else{
                 alertWarn.setHeaderText("ta errado");
                 alertWarn.showAndWait();
@@ -59,6 +72,7 @@ public class LoginBoundary extends Application {
 
         primaryStage.setScene(scCeneLogin);
         primaryStage.setTitle("Login S2");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
