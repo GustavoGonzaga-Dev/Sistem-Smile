@@ -44,7 +44,6 @@ public class FuncionarioBoundary extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         control.conectarbanco();
-        control.admin();
         Pane pPane = new Pane();
         Scene scCeneFuncionario = new Scene(pPane, 500, 330);
 
@@ -245,6 +244,7 @@ public class FuncionarioBoundary extends Application {
 
         stage.setScene(scCeneFuncionario);
         stage.setTitle("Funcionário S2");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -282,9 +282,5 @@ public class FuncionarioBoundary extends Application {
             alertMess.setHeaderText("FUNCIONARIO NÃO EXISTE.");
             alertMess.showAndWait();
         }
-    }
-
-    public static void main(String[] args) {
-        Application.launch(FuncionarioBoundary.class, args);
     }
 }

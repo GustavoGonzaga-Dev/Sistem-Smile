@@ -17,7 +17,6 @@ public class FuncionarioController {
     public Connection conectarbanco() {
         try {
             con = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Conectado no banco de dados");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,7 +129,6 @@ public class FuncionarioController {
             PreparedStatement stmt = conAD.prepareStatement(sql);
             stmt.setLong(1, 0);
             ResultSet rs = stmt.executeQuery();
-            System.out.println(rs.first());
             if (!rs.first()) {
                 Funcionario Fn = new Funcionario();
                 Fn.setNome("ADMIN");

@@ -1,7 +1,7 @@
 package login;
 
-import funcionario.Funcionario;
 import funcionario.FuncionarioBoundary;
+import funcionario.FuncionarioController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import menu.MenuBoundary;
 
 public class LoginBoundary extends Application {
 
@@ -19,13 +20,14 @@ public class LoginBoundary extends Application {
     private Button btnEntrar = new Button("Entrar");
 
     private LoginController logControl = new LoginController();
+    private FuncionarioController adm = new FuncionarioController();
 
     private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
     private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
 
     private boolean permitido = false;
 
-    //private FuncionarioBoundary funcTela = new FuncionarioBoundary();
+    private MenuBoundary menuTela = new MenuBoundary();
 
     public static void main(String[] args) {
         Application.launch(LoginBoundary.class, args);
@@ -35,6 +37,8 @@ public class LoginBoundary extends Application {
     public void start(Stage primaryStage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneLogin = new Scene(pPane, 500, 330);
+
+        adm.admin();
 
         Label lblEmail = new Label("Email:");
         Label lblSenha = new Label("Senha:");
@@ -60,7 +64,7 @@ public class LoginBoundary extends Application {
                 try {
                     Stage stage = new Stage();
                     primaryStage.close();
-                    //funcTela.start(stage);
+                    menuTela.start(stage);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -82,5 +86,4 @@ public class LoginBoundary extends Application {
         Lg.setSenha(txtSenha.getText());
         return Lg;
     }
-
 }

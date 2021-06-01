@@ -10,8 +10,6 @@ public class LoginController {
 
     public static boolean validarLogin(Login Lg) {
         try (Connection conLg = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            System.out.println(Lg.getEmail());
-            System.out.println(Lg.getSenha());
             String sqlLg = "SELECT * FROM funcionario WHERE email LIKE ?";
             PreparedStatement stmtLg = conLg.prepareStatement(sqlLg);
             stmtLg.setString(1, Lg.getEmail());

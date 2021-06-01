@@ -1,5 +1,6 @@
 package menu;
 
+import funcionario.FuncionarioBoundary;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,6 +19,8 @@ public class MenuBoundary extends Application {
     private Button btnFuncionario = new Button("Gerenciar \n" + "Funcionario");
     private Button btnCaixa = new Button("Caixa");
     private Button btnVenda = new Button("Venda");
+
+    private FuncionarioBoundary funcTela = new FuncionarioBoundary();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,14 +42,18 @@ public class MenuBoundary extends Application {
         painel.setTranslateX(125);
         painel.setTranslateY(30);
 
-        stage.setResizable(false);
+        btnFuncionario.setOnAction((e) -> {
+            Stage stageFunc = new Stage();
+            try {
+                funcTela.start(stageFunc);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
         stage.setScene(scene);
         stage.setTitle("Menu S2");
+        stage.setResizable(false);
         stage.show();
     }
-
-    public static void main(String[] args) {
-        Application.launch(MenuBoundary.class, args);
-    }
-
 }
