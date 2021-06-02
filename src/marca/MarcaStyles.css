@@ -1,0 +1,12 @@
+.button {
+    -fx-min-height: 30;
+    -fx-min-width: 60;
+}
+.label{
+    -fx-border-color: gray;
+    -fx-min-height: 130;
+    -fx-min-width: 180;
+}
+.text-field{
+    -fx-min-width: 220;
+}
