@@ -43,7 +43,6 @@ public class FuncionarioBoundary extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        control.conectarbanco();
         Pane pPane = new Pane();
         Scene scCeneFuncionario = new Scene(pPane, 500, 330);
 

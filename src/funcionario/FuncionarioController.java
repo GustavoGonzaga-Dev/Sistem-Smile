@@ -12,20 +12,9 @@ public class FuncionarioController {
     public static final String USER = "root";
     public static final String PASSWORD = "";
 
-    public Connection con;
-
-    public Connection conectarbanco() {
-        try {
-            con = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return con;
-    }
-
     public void adicionar(Funcionario Fn) {
         funcionarios.add(Fn);
-        try {
+        try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)){
             String sqlADD = "INSERT INTO FUNCIONARIO" +
                     "(CODIGO, NOME, EMAIL, CONFIRMA_EMAIL, PERMISSAO, SENHA, CONFIRMA_SENHA) VALUES" +
                     "(?, ?, ?, ?, ?, ?, ?)";
@@ -69,7 +58,7 @@ public class FuncionarioController {
     public void excluir(Funcionario Fn) {
         try (Connection conEX = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sqlEX = "DELETE FROM funcionario WHERE codigo LIKE ?";
-            PreparedStatement stmtEX = con.prepareStatement(sqlEX);
+            PreparedStatement stmtEX = conEX.prepareStatement(sqlEX);
             stmtEX.setLong(1, Fn.getCodigo());
             ResultSet rs = stmtEX.executeQuery();
         } catch (SQLException e) {
