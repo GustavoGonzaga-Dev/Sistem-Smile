@@ -10,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import marca.MarcaBoundary;
-import tamanho.Tamanho;
-import tamanho.TamanhoController;
 
 public class CategoriaBoundary extends Application {
 

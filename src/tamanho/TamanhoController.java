@@ -1,7 +1,5 @@
 package tamanho;
 
-import marca.Marca;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

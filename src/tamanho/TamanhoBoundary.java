@@ -9,9 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import marca.Marca;
 import marca.MarcaBoundary;
-import marca.MarcaController;
 
 public class TamanhoBoundary extends Application {
 
@@ -35,7 +33,7 @@ public class TamanhoBoundary extends Application {
     @Override
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
-        Scene scCeneMarca = new Scene(pPane, 400, 250);
+        Scene scCeneTamanho = new Scene(pPane, 400, 250);
 
         Label lblCodigo = new Label("Codigo:");
         Label lblTamanho = new Label("Tamanho:");
@@ -144,7 +142,7 @@ public class TamanhoBoundary extends Application {
             }
         }));
 
-        Stage.setScene(scCeneMarca);
+        Stage.setScene(scCeneTamanho);
         Stage.setTitle("Tamanho S2");
         Stage.setResizable(false);
         Stage.show();

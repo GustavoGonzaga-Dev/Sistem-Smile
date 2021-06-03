@@ -122,7 +122,7 @@ public class MarcaBoundary extends Application {
             }catch (Exception e1) {
                 e1.printStackTrace();
             }
-            alertMess.setHeaderText("Funcionario excluido!");
+            alertMess.setHeaderText("Marca excluida!");
             alertMess.showAndWait();
             btnCan.fire();
         }));
