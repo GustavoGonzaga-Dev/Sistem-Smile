@@ -37,7 +37,6 @@ public class LoginBoundary extends Application {
     public void start(Stage primaryStage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneLogin = new Scene(pPane, 500, 330);
-
         adm.admin();
 
         Label lblEmail = new Label("Email:");

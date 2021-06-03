@@ -1,5 +1,6 @@
 package menu;
 
+import estoque.EstoqueBoundary;
 import funcionario.FuncionarioBoundary;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -21,6 +22,7 @@ public class MenuBoundary extends Application {
     private Button btnVenda = new Button("Venda");
 
     private FuncionarioBoundary funcTela = new FuncionarioBoundary();
+    private EstoqueBoundary estTela = new EstoqueBoundary();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -50,6 +52,15 @@ public class MenuBoundary extends Application {
                 exception.printStackTrace();
             }
         });
+
+        btnEstoque.setOnAction((event -> {
+            Stage stageEst = new Stage();
+            try {
+                estTela.start(stageEst);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }));
 
         stage.setScene(scene);
         stage.setTitle("Menu S2");

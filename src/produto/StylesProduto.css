@@ -1,0 +1,4 @@
+.text-field{
+    -fx-min-width: 500;
+    -fx-min-height: 100;
+}
