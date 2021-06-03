@@ -55,7 +55,7 @@ public class LoginBoundary extends Application {
         pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha);
 
         btnEntrar.setOnAction((e) -> {
-            permitido = LoginController.validarLogin(boundaryToEntity());
+            permitido = logControl.validarLogin(boundaryToEntity());
 
             if(permitido){
                 alertMess.setHeaderText("tudo certo, bora pro menu");

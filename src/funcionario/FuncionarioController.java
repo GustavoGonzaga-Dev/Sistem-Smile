@@ -130,7 +130,7 @@ public class FuncionarioController {
                 adicionar(Fn);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
     }
 }
