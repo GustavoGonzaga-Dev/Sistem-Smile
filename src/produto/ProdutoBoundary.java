@@ -1,6 +1,7 @@
 package produto;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,15 +11,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class ProdutoBoundary extends Application {
 
     private TextField txtNome = new TextField();
     private TextField txtCodigo = new TextField();
     private TextField txtCor = new TextField();
+
     private ComboBox<String> cbMarca = new ComboBox<>();
-    //private String marca[] = {};
     private ComboBox<String> cbCategoria = new ComboBox<>();
     private ComboBox<String> cbTamanho = new ComboBox<>();
+
     private TextField txtPreco = new TextField();
     private TextField txtQuantidade = new TextField();
     private TextField txtDescricao = new TextField();
@@ -28,6 +32,8 @@ public class ProdutoBoundary extends Application {
     private Button btnMarca = new Button("+");
     private Button btnCategoria = new Button("+");
     private Button btnTamanho = new Button("+");
+
+    private ProdutoController prodControl = new ProdutoController();
 
     private HBox addBox() {
         HBox hbox = new HBox();
@@ -42,6 +48,8 @@ public class ProdutoBoundary extends Application {
         HBox hbox = addBox();
         border.setTop(hbox);
         border.setLeft(addBox());
+
+        carregarCombo();
 
         GridPane gridPane = new GridPane();
         Scene scene = new Scene(border, 650, 400);
@@ -95,6 +103,12 @@ public class ProdutoBoundary extends Application {
         stage.setScene(scene);
         stage.setTitle("Produto S2");
         stage.show();
+    }
+
+    public void carregarCombo(){
+        cbMarca.getItems().addAll(prodControl.carregarMarcas());
+        cbTamanho.getItems().addAll(prodControl.carregarTamanhos());
+        cbCategoria.getItems().addAll(prodControl.carregarCategoria());
     }
 
 }
