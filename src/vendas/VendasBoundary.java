@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 
 public class VendasBoundary extends Application {
     private TextField txtNome = new TextField();
@@ -26,8 +28,18 @@ public class VendasBoundary extends Application {
     @Override
     public void start(Stage stage) {
         Pane pPane = new Pane();
-        Scene scCeneFuncionario = new Scene(pPane, 550, 560);
+        Scene scCeneFuncionario = new Scene(pPane, 700, 550);
 
+        Rectangle shape = new Rectangle();
+        shape.setHeight(250);
+        shape.setWidth(200);
+        shape.setArcHeight(30.0);
+        shape.setArcWidth(30.0);
+
+        shape.setFill(Color.TRANSPARENT);
+        shape.setStroke(Color.BLACK);
+
+        table.setMinSize(350,200);
         Situacao.getItems().addAll(status);
 
         Label lblCodigo = new Label("Codigo da venda:");
@@ -43,38 +55,42 @@ public class VendasBoundary extends Application {
         TableColumn quantidade = new TableColumn("Qtd");
         TableColumn preco = new TableColumn("Valor");
 
-        lblCodigo.relocate(40, 10);
-        txtCodigo.relocate(20, 30);
+        lblCodigo.relocate(60, 10);
+        txtCodigo.relocate(40, 30);
 
-        lblCodigoCliente.relocate(40, 80);
-        txtCodigoCliente.relocate(20, 100);
+        lblCodigoCliente.relocate(60, 120);
+        txtCodigoCliente.relocate(40, 140);
 
-        lblNome.relocate(40, 140);
-        txtNome.relocate(20, 160);
+        lblNome.relocate(60, 180);
+        txtNome.relocate(40, 200);
 
-        lblEndereco.relocate(40, 200);
-        txtEndereco.relocate(20, 220);
+        lblEndereco.relocate(60, 240);
+        txtEndereco.relocate(40, 260);
 
-        lblData.relocate(40, 260);
-        txtData.relocate(20, 280);
+        lblData.relocate(60, 300);
+        txtData.relocate(40, 320);
 
-        lblSituacao.relocate(40, 400);
-        Situacao.relocate(40, 420);
+        lblSituacao.relocate(60, 400);
+        Situacao.relocate(60, 420);
 
-        table.relocate(200, 0);
+        table.relocate(300, 20);
         table.getColumns().addAll(codigoProduto, nomeProduto, quantidade, preco);
+        codigoProduto.prefWidthProperty().bind(table.widthProperty().multiply(0.38));
 
-        lblTotal.relocate(300, 420);
-        txtTotal.relocate(373, 413);
+
+        lblTotal.relocate(330, 440);
+        txtTotal.relocate(400, 438);
         txtTotal.setDisable(true);
 
-        btnAlterar.relocate(65, 460);
-        btnPesq.relocate(65, 320);
+        shape.relocate(20,110);
+
+        btnAlterar.relocate(85, 460);
+        btnPesq.relocate(80, 70);
         btnBack.relocate(420, 480);
 
         pPane.getChildren().addAll(lblNome, lblCodigo, txtCodigo, lblCodigoCliente, txtCodigoCliente, txtNome,
                 lblEndereco, txtEndereco, lblData, txtData, lblSituacao, btnAlterar, table, Situacao, btnBack,
-                lblTotal, txtTotal, btnPesq);
+                lblTotal, txtTotal, btnPesq, shape);
 
         stage.setScene(scCeneFuncionario);
         stage.setTitle("Vendas");
