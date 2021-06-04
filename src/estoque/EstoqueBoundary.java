@@ -2,12 +2,15 @@ package estoque;
 
 import categoria.CategoriaBoundary;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import marca.MarcaBoundary;
 import produto.ProdutoBoundary;
 import tamanho.TamanhoBoundary;
@@ -59,6 +62,10 @@ public class EstoqueBoundary extends Application {
 
         control.Tabela();
         borderPane.setLeft(control.getTable());
+
+        StringConverter integerToStringConverter = new IntegerStringConverter();
+//        Bindings.bindBidirectional(txtId.textProperty(), control.codigoProperty(), integerToStringConverter);
+
 
         btnCategoria.setOnAction((event -> {
             Stage stageCategoria = new Stage();

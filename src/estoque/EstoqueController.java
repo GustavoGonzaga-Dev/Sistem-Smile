@@ -3,9 +3,11 @@ package estoque;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class EstoqueController {
 
@@ -32,6 +34,31 @@ public class EstoqueController {
         return quantidade;
     }
 
+    public void setEntity(Estoque est){
+        if(est != null){
+            codigo.set(est.getCodProduto());
+            nome.set(est.getNomeProduto());
+            valor.set(est.getValor());
+            quantidade.set(est.getQuantidade());
+        }
+    }
+
+    public Estoque getEntity(){
+        Estoque est = new Estoque();
+        est.setCodProduto(codigo.get());
+        est.setNomeProduto(nome.get());
+        est.setValor(valor.get());
+        est.setQuantidade(quantidade.get());
+        return est;
+    }
+
+    public void adicionar(){
+        Estoque est = getEntity();
+        estoque.add(est);
+    }
+
+
+
     public void Tabela(){
         TableColumn<Estoque,Integer> colunaCodigo = new TableColumn<>("Codigo Produto");
         colunaCodigo.setCellValueFactory(new PropertyValueFactory<Estoque, Integer>("codigo produto"));
@@ -44,11 +71,12 @@ public class EstoqueController {
 
         TableColumn<Estoque,Integer> colunaQuantidade = new TableColumn<>("Quantidade");
         colunaQuantidade.setCellValueFactory(new PropertyValueFactory<Estoque, Integer>("quantidade"));
+
+    tableEstoque.getColumns().addAll(colunaCodigo, colunaNome, colunaValor, colunaQuantidade);
+    tableEstoque.setItems(estoque);
     }
-
-
-
     public TableView<Estoque> getTable(){
         return tableEstoque;
     }
+
 }
