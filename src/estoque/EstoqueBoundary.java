@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import marca.MarcaBoundary;
 import produto.ProdutoBoundary;
 import produto.ProdutoController;
@@ -49,19 +47,37 @@ public class EstoqueBoundary extends Application {
 
     private VBox addVbox(){
         VBox vbox = new VBox();
+        VBox vbox1 = new VBox();
+        VBox vbox2 = new VBox();
+        VBox vbox3 = new VBox();
+        VBox vbox4 = new VBox();
+
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(8);
 
         Button btns[] = new Button[]{
-          btnCategoria = new Button("Gerenciar Categorias"),
-          btnTamanho = new Button("Gerenciar Tamanhos"),
-          btnMarca = new Button("Gerenciar Marcas"),
-          btnAdicionar = new Button("+"),
+                btnCategoria = new Button("Gerenciar Categorias"),
+                btnTamanho = new Button("Gerenciar Tamanhos"),
+                btnMarca = new Button("Gerenciar Marcas"),
+                btnAdicionar = new Button("+"),
         };
-        for (int i = 0 ; i < 4 ; i++){
-            VBox.setMargin(btns[i], new Insets(5,5,14,5));
-            vbox.getChildren().add(btns[i]);
-        }
+        VBox.setMargin(btns[0], new Insets(8, 5, 8, 5));
+        vbox1.getChildren().add(btns[0]);
+        vbox1.setStyle(cssLayout);
+        vbox1.setAlignment(Pos.CENTER);
+        VBox.setMargin(btns[1], new Insets(8, 5, 8, 5));
+        vbox2.getChildren().add(btns[1]);
+        vbox2.setStyle(cssLayout);
+        vbox2.setAlignment(Pos.CENTER);
+        VBox.setMargin(btns[2], new Insets(8, 5, 8, 5));
+        vbox3.getChildren().add(btns[2]);
+        vbox3.setStyle(cssLayout);
+        vbox3.setAlignment(Pos.CENTER);
+        VBox.setMargin(btns[3], new Insets(8, 5, 8, 5));
+        vbox4.getChildren().add(btns[3]);
+        vbox4.setStyle(cssLayout);
+        vbox4.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(vbox1,vbox2,vbox3,vbox4);
         return vbox;
     }
 
@@ -75,7 +91,6 @@ public class EstoqueBoundary extends Application {
 
         VBox vbox = addVbox();
         vbox.setAlignment(Pos.CENTER);
-        vbox.setStyle(cssLayout);
         borderPane.setRight(vbox);
 
         Scene scCeneEstoque = new Scene(borderPane, 650, 350);
