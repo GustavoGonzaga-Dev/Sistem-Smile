@@ -2,9 +2,7 @@ package produto;
 
 import categoria.CategoriaBoundary;
 import categoria.CategoriaController;
-import funcionario.Funcionario;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,8 +12,6 @@ import marca.MarcaBoundary;
 import marca.MarcaController;
 import tamanho.TamanhoBoundary;
 import tamanho.TamanhoController;
-
-import java.util.List;
 
 public class ProdutoBoundary extends Application {
 
@@ -37,7 +33,7 @@ public class ProdutoBoundary extends Application {
     private Button btnCategoria = new Button("+");
     private Button btnTamanho = new Button("+");
 
-    private ProdutoController prodControl = new ProdutoController();
+    ProdutoController prodCont = new ProdutoController();
     private MarcaBoundary marcaTela = new MarcaBoundary();
     private MarcaController mcControl = new MarcaController();
     private CategoriaBoundary categoriaTela = new CategoriaBoundary();
@@ -117,7 +113,7 @@ public class ProdutoBoundary extends Application {
         border.setBottom(anchorPane);
 
         btnAdicionar.setOnAction((event -> {
-            prodControl.adicionar(boundaryToEntity());
+            prodCont.adicionar(boundaryToEntity());
             this.entityToBoundary(new Produto());
             alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
             alertMess.showAndWait();
@@ -168,9 +164,9 @@ public class ProdutoBoundary extends Application {
             Pd.setCodProduto(Integer.parseInt(txtCodigo.getText()));
             Pd.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
             Pd.setPreco(Double.parseDouble(txtPreco.getText()));
-            Pd.setCodMarca(prodControl.buscarPorNomeMarca(cbMarcaValue));
-            Pd.setCodCategoria(prodControl.buscarPorNomeCategoria(cbCategoriaValue));
-            Pd.setCodTamanho(prodControl.buscarPorNomeTamanho(cbTamanhoValue));
+            Pd.setCodMarca(prodCont.buscarPorNomeMarca(cbMarcaValue));
+            Pd.setCodCategoria(prodCont.buscarPorNomeCategoria(cbCategoriaValue));
+            Pd.setCodTamanho(prodCont.buscarPorNomeTamanho(cbTamanhoValue));
         }catch (Exception e){
 
         }
@@ -195,9 +191,13 @@ public class ProdutoBoundary extends Application {
     }
 
     public void carregarCombo(){
-        cbMarca.getItems().addAll(prodControl.carregarMarcas());
-        cbTamanho.getItems().addAll(prodControl.carregarTamanhos());
-        cbCategoria.getItems().addAll(prodControl.carregarCategoria());
+        cbMarca.getItems().addAll(prodCont.carregarMarcas());
+        cbTamanho.getItems().addAll(prodCont.carregarTamanhos());
+        cbCategoria.getItems().addAll(prodCont.carregarCategoria());
+    }
+
+    public void pesquisar(int cod){
+        entityToBoundary(prodCont.pesquisarPorCodigo(cod));
     }
 
 }

@@ -1,10 +1,7 @@
 package produto;
 
-import funcionario.Funcionario;
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ProdutoController {
@@ -129,5 +126,30 @@ public class ProdutoController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public Produto pesquisarPorCodigo(int cod) {
+        try (Connection conPQ = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sqlPQ = "SELECT * FROM PRODUTO WHERE CODIGO_PRODUTO LIKE ?";
+            PreparedStatement stmtPQ = conPQ.prepareStatement(sqlPQ);
+            stmtPQ.setLong(1, cod);
+            ResultSet rs = stmtPQ.executeQuery();
+            while (rs.next()) {
+                Produto Pd = new Produto();
+                Pd.setCodProduto(rs.getInt("CODIGO_PRODUTO"));
+                Pd.setCodTamanho(rs.getInt("CODIGO_TAMANHO"));
+                Pd.setCodCategoria(rs.getInt("CODIGO_CATEGORIA"));
+                Pd.setCodMarca(rs.getInt("CODIGO_MARCA"));
+                Pd.setPreco((rs.getDouble("PRECO")));
+                Pd.setNomeProduto(rs.getString("NOME_PRODUTO"));
+                Pd.setCor(rs.getString("COR"));
+                Pd.setDescricao(rs.getString("Descricao"));
+                Pd.setQuantidade(rs.getInt("QUANTIDADE"));
+                return Pd;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

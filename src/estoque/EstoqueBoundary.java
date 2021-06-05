@@ -14,6 +14,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import marca.MarcaBoundary;
 import produto.ProdutoBoundary;
+import produto.ProdutoController;
 import tamanho.TamanhoBoundary;
 
 
@@ -33,7 +34,9 @@ public class EstoqueBoundary extends Application {
     private CategoriaBoundary categoriaTela = new CategoriaBoundary();
     private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
     private MarcaBoundary marcaTela = new MarcaBoundary();
-    private ProdutoBoundary produtoTela = new ProdutoBoundary();
+    ProdutoBoundary produtoTela = new ProdutoBoundary();
+
+    public int cod;
 
     private HBox addBox() {
         HBox hbox = new HBox();
@@ -81,10 +84,6 @@ public class EstoqueBoundary extends Application {
         control.Tabela();
         borderPane.setCenter(control.getTable());
 
-        StringConverter integerToStringConverter = new IntegerStringConverter();
-//      Bindings.bindBidirectional(txtId.textProperty(), control.codigoProperty(), integerToStringConverter);
-
-
         btnCategoria.setOnAction((event -> {
             Stage stageCategoria = new Stage();
             try {
@@ -121,13 +120,24 @@ public class EstoqueBoundary extends Application {
             }
         }));
 
+        btnPesquisar.setOnAction((event -> {
+            cod = Integer.parseInt(txtBusca.getText());
+            Stage stageProdutoPesq = new Stage();
+            try {
+                produtoTela.start(stageProdutoPesq);
+                produtoTela.pesquisar(cod);
+                //produtoControl.codigo(cod);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+
+        }));
+
         stage.setScene(scCeneEstoque);
         stage.setTitle("Estoque S2");
         stage.setResizable(false);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        Application.launch(EstoqueBoundary.class, args);
-    }
+
 }
