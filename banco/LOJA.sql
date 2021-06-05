@@ -64,7 +64,7 @@ INSERT INTO CATEGORIA VALUES(
                             );
 
 INSERT INTO CATEGORIA VALUES(
-       3 , 'CALÇA'
+       3 , 'CALCA'
                             );
 
 INSERT INTO TAMANHO VALUES(
@@ -81,13 +81,13 @@ INSERT INTO TAMANHO VALUES(
 
 
 INSERT INTO PRODUTO VALUES(
-       1 , 'CAMISETA NIKE SB UNISSEX' , 'PRETO' , 1 , 1 , 1 , 120.00 , 50 , 'O tecido em jersey é macio no contato com a pele.'
+       1 , 'CAMISETA NIKE SB UNISSEX' , 'PRETO' , 1 , 1 , 1 , 120.00 , 50 , 'O tecido jersey macio no contato com a pele.'
                           );
 
 INSERT INTO PRODUTO VALUES(
-       2 , 'BLUSA CAPUZ TREFOIL' , 'BRANCO' , 2 , 2 , 2 , 310.00 , 25 , 'Equilibrada, a modelagem normal não é justa nem folgada demais.'
+       2 , 'BLUSA CAPUZ TREFOIL' , 'BRANCO' , 2 , 2 , 2 , 310.00 , 25 , 'Equilibrada, modelagem nem justa nem folgada demais.'
                           );
 
 INSERT INTO PRODUTO VALUES(
-       3 , 'PUMA X PEANUTS CALÇA MOLETOM' , 'CINZA' , 3 , 3 , 3 , 499.90 , 80 , ' Feita em material de algodão sustentável.'
+       3 , 'PUMA X PEANUTS CALCA MOLETOM' , 'CINZA' , 3 , 3 , 3 , 499.90 , 80 , ' Feita em material de algodao sustentavel.'
                           );
