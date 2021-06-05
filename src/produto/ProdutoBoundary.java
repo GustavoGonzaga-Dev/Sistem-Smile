@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import marca.MarcaBoundary;
 import marca.MarcaController;
 import tamanho.TamanhoBoundary;
@@ -65,7 +66,7 @@ public class ProdutoBoundary extends Application {
         carregarCombo();
 
         GridPane gridPane = new GridPane();
-        Scene scene = new Scene(border, 650, 400);
+        Scene scene = new Scene(border, 700, 450);
         gridPane.setVgap(20);
         gridPane.setHgap(5);
         border.setCenter(gridPane);
@@ -149,6 +150,7 @@ public class ProdutoBoundary extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Produto S2");
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

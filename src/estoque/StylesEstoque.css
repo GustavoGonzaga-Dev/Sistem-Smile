@@ -1,9 +1,8 @@
 .text-field{
-    -fx-min-width: 500;
+    -fx-min-width: 300;
 }
 
-.button {
-    -fx-min-width: 70;
-    -fx-min-height:70;
-    -fx-font-size: 30;
+
+.label{
+    -fx-font-size: 10;
 }

@@ -10,11 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class MenuBoundary extends Application {
-
-    private TextField txtBuscar = new TextField();
 
     private Button btnEstoque = new Button("Estoque");
     private Button btnFuncionario = new Button("Gerenciar \n" + "Funcionario");
@@ -33,12 +32,11 @@ public class MenuBoundary extends Application {
         painel.getStylesheets().add(MenuBoundary.class.getResource("StylesMenu.css").toExternalForm());
 
         borderPaine.getChildren().add(painel);
-        borderPaine.setTop(txtBuscar);
-        BorderPane.setAlignment(txtBuscar, Pos.CENTER);
         painel.add(btnEstoque, 0,1);
         painel.add(btnFuncionario,1,1);
         painel.add(btnVenda,0,2);
         painel.add(btnCaixa,1,2);
+        btnCaixa.setDisable(true);
         painel.setVgap(30);
         painel.setHgap(50);
         painel.setTranslateX(125);
@@ -65,6 +63,7 @@ public class MenuBoundary extends Application {
         stage.setScene(scene);
         stage.setTitle("Menu S2");
         stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 }

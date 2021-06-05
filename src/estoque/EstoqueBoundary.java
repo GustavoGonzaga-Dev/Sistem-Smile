@@ -7,9 +7,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import marca.MarcaBoundary;
 import produto.ProdutoBoundary;
 import produto.ProdutoController;
@@ -24,10 +26,15 @@ public class EstoqueBoundary extends Application {
     private Button btnAdicionar ;
     private Button btnPesquisar = new Button("Pesquisar");
 
+    private Label lblInfo = new Label("*Para pesquisar, insira o \n" +" codigo do produto.");
+
     private TextField txtBusca = new TextField();
     private String cssLayout =  "-fx-border-color: gray;\n" +
                                 "-fx-border-insets: 3;\n" +
                                 "-fx-border-width: 1;\n" ;
+    private String cssBorda =  "-fx-border-color: green;\n" +
+                               "-fx-border-insets: 3;\n" +
+                               "-fx-border-width: 2;\n" ;
 
     private CategoriaBoundary categoriaTela = new CategoriaBoundary();
     private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
@@ -38,9 +45,10 @@ public class EstoqueBoundary extends Application {
 
     private HBox addBox() {
         HBox hbox = new HBox();
-        hbox.setPadding(new Insets(20, 20, 20, 20));
+        hbox.setPadding(new Insets(30, 20, 20, 20));
         hbox.setSpacing(20);
-        hbox.getChildren().addAll(txtBusca, btnPesquisar);
+        hbox.getChildren().addAll(lblInfo,txtBusca, btnPesquisar);
+        lblInfo.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
         txtBusca.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
         return hbox;
     }
@@ -56,14 +64,14 @@ public class EstoqueBoundary extends Application {
         vbox.setSpacing(8);
 
         Button btns[] = new Button[]{
+                btnAdicionar = new Button("Adicionar novo produto"),
                 btnCategoria = new Button("Gerenciar Categorias"),
                 btnTamanho = new Button("Gerenciar Tamanhos"),
                 btnMarca = new Button("Gerenciar Marcas"),
-                btnAdicionar = new Button("+"),
-        };
+         };
         VBox.setMargin(btns[0], new Insets(8, 5, 8, 5));
         vbox1.getChildren().add(btns[0]);
-        vbox1.setStyle(cssLayout);
+        vbox1.setStyle(cssBorda);
         vbox1.setAlignment(Pos.CENTER);
         VBox.setMargin(btns[1], new Insets(8, 5, 8, 5));
         vbox2.getChildren().add(btns[1]);
@@ -93,7 +101,7 @@ public class EstoqueBoundary extends Application {
         vbox.setAlignment(Pos.CENTER);
         borderPane.setRight(vbox);
 
-        Scene scCeneEstoque = new Scene(borderPane, 650, 350);
+        Scene scCeneEstoque = new Scene(borderPane, 650, 360);
         btnAdicionar.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
 
         control.Tabela();
@@ -151,6 +159,7 @@ public class EstoqueBoundary extends Application {
         stage.setScene(scCeneEstoque);
         stage.setTitle("Estoque S2");
         stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
