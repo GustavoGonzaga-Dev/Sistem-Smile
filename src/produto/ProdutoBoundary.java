@@ -1,15 +1,19 @@
 package produto;
 
+import categoria.CategoriaBoundary;
+import categoria.CategoriaController;
+import funcionario.Funcionario;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import marca.MarcaBoundary;
+import marca.MarcaController;
+import tamanho.TamanhoBoundary;
+import tamanho.TamanhoController;
 
 import java.util.List;
 
@@ -27,13 +31,26 @@ public class ProdutoBoundary extends Application {
     private TextField txtQuantidade = new TextField();
     private TextField txtDescricao = new TextField();
 
-    private Button btnEditar = new Button("Editar");
+    private Button btnAdicionar = new Button("Adicionar");
     private Button btnFechar = new Button("Fechar");
     private Button btnMarca = new Button("+");
     private Button btnCategoria = new Button("+");
     private Button btnTamanho = new Button("+");
 
     private ProdutoController prodControl = new ProdutoController();
+    private MarcaBoundary marcaTela = new MarcaBoundary();
+    private MarcaController mcControl = new MarcaController();
+    private CategoriaBoundary categoriaTela = new CategoriaBoundary();
+    private CategoriaController ctControl = new CategoriaController();
+    private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
+    private TamanhoController tmControl = new TamanhoController();
+
+    private String cbMarcaValue;
+    private String cbTamanhoValue;
+    private String cbCategoriaValue;
+
+    private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
+    private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
 
     private HBox addBox() {
         HBox hbox = new HBox();
@@ -93,16 +110,88 @@ public class ProdutoBoundary extends Application {
         HBox box = new HBox();
         box.setPadding(new Insets(0,40,10,20));
         box.setSpacing(10);
-        box.getChildren().addAll(txtDescricao, btnEditar,btnFechar);
+        box.getChildren().addAll(txtDescricao, btnAdicionar);
         anchorPane.getChildren().addAll( box);
         AnchorPane.setBottomAnchor(box,8.0);
         AnchorPane.setRightAnchor(box,5.0);
         border.setBottom(anchorPane);
 
+        btnAdicionar.setOnAction((event -> {
+            prodControl.adicionar(boundaryToEntity());
+            this.entityToBoundary(new Produto());
+            alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
+            alertMess.showAndWait();
+        }));
+
+        btnCategoria.setOnAction((event -> {
+            Stage stageCat = new Stage();
+            try {
+                categoriaTela.start(stageCat);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+
+        btnMarca.setOnAction((event -> {
+            Stage stageMar = new Stage();
+            try {
+                marcaTela.start(stageMar);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+
+        btnTamanho.setOnAction((event -> {
+            Stage stageTam = new Stage();
+            try {
+                tamanhoTela.start(stageTam);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Produto S2");
         stage.show();
+    }
+
+    public Produto boundaryToEntity(){
+        Produto Pd = new Produto();
+        Pd.setNomeProduto(txtNome.getText());
+        Pd.setCor(txtCor.getText());
+        Pd.setDescricao(txtDescricao.getText());
+        cbMarcaValue = cbMarca.getValue();
+        cbCategoriaValue = cbCategoria.getValue();
+        cbTamanhoValue = cbTamanho.getValue();
+        try {
+            Pd.setCodProduto(Integer.parseInt(txtCodigo.getText()));
+            Pd.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            Pd.setPreco(Double.parseDouble(txtPreco.getText()));
+            Pd.setCodMarca(prodControl.buscarPorNomeMarca(cbMarcaValue));
+            Pd.setCodCategoria(prodControl.buscarPorNomeCategoria(cbCategoriaValue));
+            Pd.setCodTamanho(prodControl.buscarPorNomeTamanho(cbTamanhoValue));
+        }catch (Exception e){
+
+        }
+        return Pd;
+    }
+
+    public void entityToBoundary(Produto Pd) { //consultando a entidade e jogando na tela
+        if (Pd != null) {
+            txtCodigo.setText(String.valueOf(Pd.getCodProduto()));
+            txtNome.setText(Pd.getNomeProduto());
+            txtDescricao.setText(Pd.getDescricao());
+            txtCor.setText(Pd.getCor());
+            txtQuantidade.setText(String.valueOf(Pd.getQuantidade()));
+            txtPreco.setText(String.valueOf(Pd.getPreco()));
+            cbMarca.setValue(String.valueOf(mcControl.pesquisarPorCodigo(Pd.getCodMarca())));
+            cbTamanho.setValue(String.valueOf(tmControl.pesquisarPorCodigo(Pd.getCodTamanho())));
+            cbCategoria.setValue(String.valueOf(ctControl.pesquisarPorCodigo(Pd.getCodCategoria())));
+        } else {
+            alertMess.setHeaderText("PRODUTO NÃO EXISTE.");
+            alertMess.showAndWait();
+        }
     }
 
     public void carregarCombo(){
