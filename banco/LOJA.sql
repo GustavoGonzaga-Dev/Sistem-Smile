@@ -38,3 +38,56 @@ CREATE TABLE PRODUTO(
     QUANTIDADE INT NOT NULL,
     DESCRICAO VARCHAR (100) NOT NULL
 );
+
+INSERT INTO FUNCIONARIO VALUES(
+        1 , 'COMUM' , 'COMUN@COMUUN.COM' , 'COMUN@COMUUM.COM' , 'COMUM' , 'COMUM1234' , 'COMUM1234'
+                              );
+
+INSERT INTO MARCA VALUES(
+        1 , 'NIKE'
+                        );
+
+INSERT INTO MARCA VALUES(
+        2 , 'ADIDAS'
+                        );
+
+INSERT INTO MARCA VALUES(
+        3 , 'PUMA'
+                        );
+
+INSERT INTO CATEGORIA VALUES(
+        1 , 'CAMISA'
+                            );
+
+INSERT INTO CATEGORIA VALUES(
+       2 , 'BLUSA'
+                            );
+
+INSERT INTO CATEGORIA VALUES(
+       3 , 'CALÇA'
+                            );
+
+INSERT INTO TAMANHO VALUES(
+       1 , 'G'
+                          );
+
+INSERT INTO TAMANHO VALUES(
+       2 , 'M'
+                          );
+
+INSERT INTO TAMANHO VALUES(
+       3 , 'P'
+                          );
+
+
+INSERT INTO PRODUTO VALUES(
+       1 , 'CAMISETA NIKE SB UNISSEX' , 'PRETO' , 1 , 1 , 1 , 120.00 , 50 , 'O tecido em jersey é macio no contato com a pele.'
+                          );
+
+INSERT INTO PRODUTO VALUES(
+       2 , 'BLUSA CAPUZ TREFOIL' , 'BRANCO' , 2 , 2 , 2 , 310.00 , 25 , 'Equilibrada, a modelagem normal não é justa nem folgada demais.'
+                          );
+
+INSERT INTO PRODUTO VALUES(
+       3 , 'PUMA X PEANUTS CALÇA MOLETOM' , 'CINZA' , 3 , 3 , 3 , 499.90 , 80 , ' Feita em material de algodão sustentável.'
+                          );
