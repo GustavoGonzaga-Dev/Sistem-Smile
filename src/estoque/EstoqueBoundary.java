@@ -2,59 +2,102 @@ package estoque;
 
 import categoria.CategoriaBoundary;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import marca.MarcaBoundary;
+import produto.ProdutoBoundary;
 import tamanho.TamanhoBoundary;
 
 
 public class EstoqueBoundary extends Application {
 
-    private Button btnCat = new Button("Gerenciar Categorias");
-    private Button btnTam = new Button("Gerenciar Tamanhos");
-    private Button btnMar = new Button("Gerenciar Marcas");
+    private Button btnCategoria = new Button("Gerenciar Categorias");
+    private Button btnTamanho = new Button("Gerenciar Tamanhos");
+    private Button btnMarca = new Button("Gerenciar Marcas");
+    private Button btnAdicionar = new Button("+");
 
-    private CategoriaBoundary catTela = new CategoriaBoundary();
-    private TamanhoBoundary tamTela = new TamanhoBoundary();
-    private MarcaBoundary marTela = new MarcaBoundary();
+    private TextField txtBusca = new TextField();
+
+    private CategoriaBoundary categoriaTela = new CategoriaBoundary();
+    private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
+    private MarcaBoundary marcaTela = new MarcaBoundary();
+    private ProdutoBoundary produtoTela = new ProdutoBoundary();
+
+    private HBox addBox() {
+        HBox hbox = new HBox();
+        hbox.setPadding(new Insets(20, 20, 20, 20));
+        hbox.setSpacing(20);
+        hbox.getChildren().addAll(txtBusca);
+        txtBusca.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
+        return hbox;
+    }
+
+    private EstoqueController control = new EstoqueController();
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane pPane = new Pane();
-        Scene scCeneEstoque = new Scene(pPane, 500, 330);
+        BorderPane borderPane = new BorderPane();
+        HBox hbox = addBox();
+        borderPane.setTop(hbox);
 
-        btnCat.relocate(50, 50);
-        btnMar.relocate(50, 150);
-        btnTam.relocate(50, 250);
+        GridPane gridPane = new GridPane();
+        gridPane.setVgap(40);
+        gridPane.setHgap(10);
+
+        Scene scCeneEstoque = new Scene(borderPane, 600, 350);
 
 
+        borderPane.setRight(gridPane);
+        gridPane.add(btnMarca,0,0);
+        gridPane.add(btnCategoria,0,1);
+        gridPane.add(btnTamanho,0,2);
+        gridPane.add(btnAdicionar,0,3);
 
-        pPane.getChildren().addAll(btnCat, btnMar, btnTam);
+        control.Tabela();
+        borderPane.setCenter(control.getTable());
 
-        btnCat.setOnAction((event -> {
-            Stage stageCat = new Stage();
+        StringConverter integerToStringConverter = new IntegerStringConverter();
+//      Bindings.bindBidirectional(txtId.textProperty(), control.codigoProperty(), integerToStringConverter);
+
+
+        btnCategoria.setOnAction((event -> {
+            Stage stageCategoria = new Stage();
             try {
-                catTela.start(stageCat);
+                categoriaTela.start(stageCategoria);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }));
 
-        btnMar.setOnAction((event -> {
-            Stage stageMar = new Stage();
+        btnMarca.setOnAction((event -> {
+            Stage stageMarca = new Stage();
             try {
-                marTela.start(stageMar);
+                marcaTela.start(stageMarca);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
         }));
 
-        btnTam.setOnAction((event -> {
-            Stage stageTam = new Stage();
+        btnTamanho.setOnAction((event -> {
+            Stage stageTamanho = new Stage();
             try {
-                tamTela.start(stageTam);
+                tamanhoTela.start(stageTamanho);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }));
+
+        btnAdicionar.setOnAction((event -> {
+            Stage stageProduto = new Stage();
+            try {
+                produtoTela.start(stageProduto);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -64,5 +107,9 @@ public class EstoqueBoundary extends Application {
         stage.setTitle("Estoque S2");
         stage.setResizable(false);
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        Application.launch(EstoqueBoundary.class, args);
     }
 }
