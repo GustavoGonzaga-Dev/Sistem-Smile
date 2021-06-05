@@ -61,9 +61,11 @@ public class LoginBoundary extends Application {
                 alertMess.setHeaderText("tudo certo, bora pro menu");
                 alertMess.showAndWait();
                 try {
+                    String nvnPerm = logControl.getPermissao();
                     Stage stage = new Stage();
                     primaryStage.close();
                     menuTela.start(stage);
+                    menuTela.menuComum(nvnPerm);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }

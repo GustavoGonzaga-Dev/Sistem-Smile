@@ -150,7 +150,6 @@ public class ProdutoBoundary extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Produto S2");
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

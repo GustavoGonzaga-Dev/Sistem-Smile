@@ -63,7 +63,12 @@ public class MenuBoundary extends Application {
         stage.setScene(scene);
         stage.setTitle("Menu S2");
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
+    }
+
+    public void menuComum(String nvnperm){
+        if (nvnperm.equals("COMUM")){
+            btnFuncionario.setVisible(false);
+        }
     }
 }

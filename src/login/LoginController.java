@@ -8,7 +8,17 @@ public class LoginController {
     public static final String USER = "root";
     public static final String PASSWORD = "";
 
-    public static boolean validarLogin(Login Lg) {
+    public String permissao;
+
+    public String getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(String permissao) {
+        this.permissao = permissao;
+    }
+
+    public boolean validarLogin(Login Lg) {
         try (Connection conLg = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sqlLg = "SELECT * FROM funcionario WHERE email LIKE ?";
             PreparedStatement stmtLg = conLg.prepareStatement(sqlLg);
@@ -17,6 +27,7 @@ public class LoginController {
             rsLg.next();
             if (rsLg.first()) {
                 if (rsLg.getString("senha").equals(Lg.getSenha())) {
+                    setPermissao(rsLg.getString("PERMISSAO"));
                     return true;
                 }
             }

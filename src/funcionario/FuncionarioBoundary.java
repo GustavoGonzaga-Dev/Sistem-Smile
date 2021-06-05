@@ -245,7 +245,6 @@ public class FuncionarioBoundary extends Application {
         stage.setScene(scCeneFuncionario);
         stage.setTitle("Funcionário S2");
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

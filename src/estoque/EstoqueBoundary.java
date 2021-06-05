@@ -159,7 +159,6 @@ public class EstoqueBoundary extends Application {
         stage.setScene(scCeneEstoque);
         stage.setTitle("Estoque S2");
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
