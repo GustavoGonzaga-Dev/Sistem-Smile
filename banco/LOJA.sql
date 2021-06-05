@@ -68,7 +68,7 @@ INSERT INTO CATEGORIA VALUES(
                             );
 
 INSERT INTO TAMANHO VALUES(
-       1 , 'G'
+       1 , 'P'
                           );
 
 INSERT INTO TAMANHO VALUES(
@@ -76,7 +76,7 @@ INSERT INTO TAMANHO VALUES(
                           );
 
 INSERT INTO TAMANHO VALUES(
-       3 , 'P'
+       3 , 'G'
                           );
 
 
