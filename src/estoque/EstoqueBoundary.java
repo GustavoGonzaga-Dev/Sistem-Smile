@@ -4,6 +4,7 @@ import categoria.CategoriaBoundary;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,12 +19,16 @@ import tamanho.TamanhoBoundary;
 
 public class EstoqueBoundary extends Application {
 
-    private Button btnCategoria = new Button("Gerenciar Categorias");
-    private Button btnTamanho = new Button("Gerenciar Tamanhos");
-    private Button btnMarca = new Button("Gerenciar Marcas");
-    private Button btnAdicionar = new Button("+");
+    private Button btnCategoria ;
+    private Button btnTamanho ;
+    private Button btnMarca ;
+    private Button btnAdicionar ;
+    private Button btnPesquisar = new Button("Pesquisar");
 
     private TextField txtBusca = new TextField();
+    private String cssLayout =  "-fx-border-color: gray;\n" +
+                                "-fx-border-insets: 3;\n" +
+                                "-fx-border-width: 1;\n" ;
 
     private CategoriaBoundary categoriaTela = new CategoriaBoundary();
     private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
@@ -34,9 +39,27 @@ public class EstoqueBoundary extends Application {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(20, 20, 20, 20));
         hbox.setSpacing(20);
-        hbox.getChildren().addAll(txtBusca);
+        hbox.getChildren().addAll(txtBusca, btnPesquisar);
         txtBusca.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
         return hbox;
+    }
+
+    private VBox addVbox(){
+        VBox vbox = new VBox();
+        vbox.setPadding(new Insets(10));
+        vbox.setSpacing(8);
+
+        Button btns[] = new Button[]{
+          btnCategoria = new Button("Gerenciar Categorias"),
+          btnTamanho = new Button("Gerenciar Tamanhos"),
+          btnMarca = new Button("Gerenciar Marcas"),
+          btnAdicionar = new Button("+"),
+        };
+        for (int i = 0 ; i < 4 ; i++){
+            VBox.setMargin(btns[i], new Insets(5,5,14,5));
+            vbox.getChildren().add(btns[i]);
+        }
+        return vbox;
     }
 
     private EstoqueController control = new EstoqueController();
@@ -47,18 +70,13 @@ public class EstoqueBoundary extends Application {
         HBox hbox = addBox();
         borderPane.setTop(hbox);
 
-        GridPane gridPane = new GridPane();
-        gridPane.setVgap(40);
-        gridPane.setHgap(10);
+        VBox vbox = addVbox();
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setStyle(cssLayout);
+        borderPane.setRight(vbox);
 
-        Scene scCeneEstoque = new Scene(borderPane, 600, 350);
-
-
-        borderPane.setRight(gridPane);
-        gridPane.add(btnMarca,0,0);
-        gridPane.add(btnCategoria,0,1);
-        gridPane.add(btnTamanho,0,2);
-        gridPane.add(btnAdicionar,0,3);
+        Scene scCeneEstoque = new Scene(borderPane, 650, 350);
+        btnAdicionar.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
 
         control.Tabela();
         borderPane.setCenter(control.getTable());
