@@ -54,17 +54,17 @@ public class EstoqueBoundary extends Application {
         Scene scCeneEstoque = new Scene(borderPane, 600, 350);
 
 
-        borderPane.setCenter(gridPane);
+        borderPane.setRight(gridPane);
         gridPane.add(btnMarca,0,0);
         gridPane.add(btnCategoria,0,1);
         gridPane.add(btnTamanho,0,2);
         gridPane.add(btnAdicionar,0,3);
 
         control.Tabela();
-        borderPane.setLeft(control.getTable());
+        borderPane.setCenter(control.getTable());
 
         StringConverter integerToStringConverter = new IntegerStringConverter();
-//        Bindings.bindBidirectional(txtId.textProperty(), control.codigoProperty(), integerToStringConverter);
+//      Bindings.bindBidirectional(txtId.textProperty(), control.codigoProperty(), integerToStringConverter);
 
 
         btnCategoria.setOnAction((event -> {
