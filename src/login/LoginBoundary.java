@@ -8,9 +8,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import menu.MenuBoundary;
+
+import java.io.FileInputStream;
 
 public class LoginBoundary extends Application {
 
@@ -42,6 +46,12 @@ public class LoginBoundary extends Application {
         Label lblEmail = new Label("Email:");
         Label lblSenha = new Label("Senha:");
 
+        Image img = new Image(new FileInputStream("img/logoPandaVermelho.png"));
+        ImageView imgLogo = new ImageView(img);
+        imgLogo.relocate(165, -10);
+        imgLogo.setFitHeight ( 185 );
+        imgLogo.setFitWidth ( 160 );
+
         lblEmail.relocate(140, 160);
         txtEmail.relocate(140, 180);
         txtEmail.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
@@ -52,7 +62,7 @@ public class LoginBoundary extends Application {
 
         btnEntrar.relocate(225, 280);
 
-        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha);
+        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo);
 
         btnEntrar.setOnAction((e) -> {
             permitido = logControl.validarLogin(boundaryToEntity());
