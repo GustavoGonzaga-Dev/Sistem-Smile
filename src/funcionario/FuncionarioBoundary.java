@@ -1,6 +1,7 @@
 package funcionario;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -46,7 +47,7 @@ public class FuncionarioBoundary extends Application {
     public void start(Stage stage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneFuncionario = new Scene(pPane, 500, 330);
-
+        FuncionarioController.valida(txtCodigo);
         cbPermissao.getItems().addAll(perm);
 
         Label lblCodigo = new Label("Codigo:");
@@ -283,4 +284,6 @@ public class FuncionarioBoundary extends Application {
             alertMess.showAndWait();
         }
     }
+
+
 }
