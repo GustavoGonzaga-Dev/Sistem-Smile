@@ -1,5 +1,8 @@
 package funcionario;
 
+import javafx.application.Platform;
+import javafx.scene.control.TextField;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +135,32 @@ public class FuncionarioController {
         } catch (SQLException e) {
 
         }
+    }
+
+    private static void tamanhoCampo(TextField txtField, Integer tamanho){
+        txtField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.length() > tamanho){
+                txtField.setText(oldValue);
+            }
+        });
+    }
+
+    private static void posiciona(TextField txtField){
+        Platform.runLater(() ->{
+            if (txtField.getText().length() != 0){
+                txtField.positionCaret(txtField.getText().length());
+            }
+        });
+    }
+
+    public static void valida(TextField txtField){
+        tamanhoCampo(txtField, 20);
+        txtField.lengthProperty().addListener((observable, oldValue, newValue) ->
+        {
+            String textoDigitado = txtField.getText();
+            textoDigitado = textoDigitado.replaceAll("[^0-9]", "");
+            txtField.setText(textoDigitado);
+            posiciona(txtField);
+        });
     }
 }
