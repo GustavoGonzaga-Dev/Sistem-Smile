@@ -2,7 +2,6 @@ package estoque;
 
 import categoria.CategoriaBoundary;
 import javafx.application.Application;
-import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,12 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import marca.MarcaBoundary;
+import produto.Produto;
 import produto.ProdutoBoundary;
-import produto.ProdutoController;
 import tamanho.TamanhoBoundary;
-
 
 public class EstoqueBoundary extends Application {
 
@@ -138,6 +135,7 @@ public class EstoqueBoundary extends Application {
             Stage stageProduto = new Stage();
             try {
                 produtoTela.start(stageProduto);
+                produtoTela.entityToBoundary(new Produto());
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
@@ -149,7 +147,6 @@ public class EstoqueBoundary extends Application {
             try {
                 produtoTela.start(stageProdutoPesq);
                 produtoTela.pesquisar(cod);
-                //produtoControl.codigo(cod);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
