@@ -208,7 +208,7 @@ public class ProdutoBoundary extends Application {
         return Pd;
     }
 
-    public void entityToBoundary(Produto Pd) { //consultando a entidade e jogando na tela
+    public boolean entityToBoundary(Produto Pd) { //consultando a entidade e jogando na tela
         try {
             if (Pd != null) {
                 Marca mc;
@@ -230,6 +230,8 @@ public class ProdutoBoundary extends Application {
 
                 ct = ctControl.pesquisarPorCodigo(Pd.getCodCategoria());
                 cbCategoria.setValue(ct.getCategoria());
+
+                return true;
             } else {
                 entityToBoundary(new Produto());
                 alertMess.setHeaderText("PRODUTO NÃO EXISTE.");
@@ -238,6 +240,7 @@ public class ProdutoBoundary extends Application {
         }catch (Exception e){
 
         }
+        return false;
     }
 
     public void carregarCombo(){
@@ -250,10 +253,6 @@ public class ProdutoBoundary extends Application {
     }
 
     public void pesquisar(int cod){
-        entityToBoundary(prodCont.pesquisarPorCodigo(cod));
-        btnAdicionar.setVisible(false);
-        btnAlterar.setVisible(true);
-        btnExcluir.setVisible(true);
         txtNome.setEditable(false);
         txtCodigo.setEditable(false);
         txtCor.setEditable(false);
@@ -264,6 +263,12 @@ public class ProdutoBoundary extends Application {
         cbMarca.setDisable(true);
         cbCategoria.setDisable(true);
         btnConcluir.setVisible(false);
+        btnAdicionar.setVisible(false);
+
+        if(entityToBoundary(prodCont.pesquisarPorCodigo(cod))){
+            btnAlterar.setVisible(true);
+            btnExcluir.setVisible(true);
+        }
     }
 
 }

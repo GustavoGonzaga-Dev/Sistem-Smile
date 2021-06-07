@@ -151,7 +151,7 @@ public class ProdutoController {
                     "CODIGO_TAMANHO = ?, " +
                     "PRECO = ?," +
                     "QUANTIDADE = ?," +
-                    "DESCRICAO = ?, where codigo = ?";
+                    "DESCRICAO = ? where CODIGO_PRODUTO = ?";
             PreparedStatement stmtAL = conAL.prepareStatement(sqlAL);
             stmtAL.setString(1, pd.getNomeProduto());
             stmtAL.setString(2, pd.getCor());
