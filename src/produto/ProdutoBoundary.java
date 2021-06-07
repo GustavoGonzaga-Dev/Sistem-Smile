@@ -54,7 +54,7 @@ public class ProdutoBoundary extends Application {
 
     private HBox addBox() {
         HBox hbox = new HBox();
-        hbox.setPadding(new Insets(20, 10, 20, 15));
+        hbox.setPadding(new Insets(20, 10, 10, 15));
         hbox.setSpacing(10);
         return hbox;
     }
@@ -82,11 +82,13 @@ public class ProdutoBoundary extends Application {
 
         carregarCombo();
 
+        BorderPane bP = new BorderPane();
         GridPane gridPane = new GridPane();
         Scene scene = new Scene(border, 700, 450);
         gridPane.setVgap(20);
         gridPane.setHgap(5);
-        border.setCenter(gridPane);
+        bP.setCenter(gridPane);
+        border.setCenter(bP);
 
         Label lblNome = new Label("Nome:");
         Label lblCodigo = new Label("Codigo:");
@@ -115,7 +117,6 @@ public class ProdutoBoundary extends Application {
         gridPane.add(lblQuantidade,2,5);
         gridPane.add(txtQuantidade,3,5);
         gridPane.add(lblDescricao,0,6);
-        gridPane.setStyle(cssBorda);
         txtDescricao.getStylesheets().add(ProdutoBoundary.class.getResource("StylesProduto.css").toExternalForm());
 
         BorderPane pane = new BorderPane();
@@ -123,17 +124,18 @@ public class ProdutoBoundary extends Application {
         HBox box = new HBox();
         box.setPadding(new Insets(0,40,10,20));
         box.setSpacing(10);
-        box.getChildren().addAll(txtDescricao, btnAdicionar);
+        box.getChildren().addAll(txtDescricao);
         anchorPane.getChildren().addAll(box);
         HBox box2 = new HBox();
-        box2.getChildren().addAll(btnAlterar,btnConcluir,btnExcluir);
-        box2.setPadding(new Insets(2,0,5,250));
+        box2.getChildren().addAll(btnAlterar,btnConcluir,btnExcluir, btnAdicionar);
+        btnExcluir.getStylesheets().add(ProdutoBoundary.class.getResource("StylesProduto.css").toExternalForm());
+        box2.setPadding(new Insets(0,0,5,250));
         box2.setSpacing(20);
-
-        pane.setTop(anchorPane);
+        bP.setStyle(cssBorda);
+        bP.setBottom(anchorPane);
         pane.setBottom(box2);
+        border.setBottom(pane);
 
-          border.setBottom(pane);
         btnAdicionar.setOnAction((event -> {
             prodCont.adicionar(boundaryToEntity());
             this.entityToBoundary(new Produto());
