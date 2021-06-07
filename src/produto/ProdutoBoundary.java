@@ -32,7 +32,9 @@ public class ProdutoBoundary extends Application {
     private TextField txtDescricao = new TextField();
 
     private Button btnAdicionar = new Button("Adicionar");
-    private Button btnFechar = new Button("Fechar");
+    private Button btnAlterar = new Button("Alterar");
+    private Button btnExcluir = new Button("Excluir");
+    private Button btnConcluir = new Button("Concluir");
 
     ProdutoController prodCont = new ProdutoController();
     private MarcaController mcControl = new MarcaController();
@@ -125,6 +127,44 @@ public class ProdutoBoundary extends Application {
             alertMess.showAndWait();
         }));
 
+        btnExcluir.setOnAction((event -> {
+            try{
+                prodCont.excluir(Integer.parseInt(txtCodigo.getText()));
+            }catch (Exception e){
+
+            }
+            alertMess.setHeaderText("EXCLUIDO COM SUCESSO!");
+            alertMess.showAndWait();
+            btnAlterar.setVisible(false);
+            btnExcluir.setVisible(false);
+            stage.close();
+        }));
+
+        btnAlterar.setOnAction((event -> {
+            btnExcluir.setVisible(false);
+            btnConcluir.setVisible(true);
+            btnAlterar.setVisible(false);
+
+            txtNome.setEditable(true);
+            txtCor.setEditable(true);
+            txtPreco.setEditable(true);
+            txtQuantidade.setEditable(true);
+            txtDescricao.setEditable(true);
+            cbTamanho.setDisable(false);
+            cbMarca.setDisable(false);
+            cbCategoria.setDisable(false);
+        }));
+
+        btnConcluir.setOnAction((event -> {
+
+            prodCont.alterar(boundaryToEntity());
+            alertMess.setHeaderText("ALTERADO COM SUCESSO!");
+            alertMess.showAndWait();
+            btnConcluir.setVisible(false);
+
+            stage.close();
+        }));
+
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("Produto S2");
@@ -196,6 +236,8 @@ public class ProdutoBoundary extends Application {
     public void pesquisar(int cod){
         entityToBoundary(prodCont.pesquisarPorCodigo(cod));
         btnAdicionar.setVisible(false);
+        btnAlterar.setVisible(true);
+        btnExcluir.setVisible(true);
         txtNome.setEditable(false);
         txtCodigo.setEditable(false);
         txtCor.setEditable(false);

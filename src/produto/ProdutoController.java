@@ -1,5 +1,7 @@
 package produto;
 
+import funcionario.Funcionario;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,6 +127,44 @@ public class ProdutoController {
             stmtADD.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+    }
+
+    public void excluir(int cod) {
+        try (Connection conEX = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sqlEX = "DELETE FROM PRODUTO WHERE CODIGO_PRODUTO LIKE ?";
+            PreparedStatement stmtEX = conEX.prepareStatement(sqlEX);
+            stmtEX.setLong(1, cod);
+            ResultSet rs = stmtEX.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void alterar(Produto pd) {
+        try (Connection conAL = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            String sqlAL = "UPDATE PRODUTO SET " +
+                    "NOME_PRODUTO = ?, " +
+                    "COR = ?, " +
+                    "CODIGO_MARCA = ?, " +
+                    "CODIGO_CATEGORIA = ?, " +
+                    "CODIGO_TAMANHO = ?, " +
+                    "PRECO = ?," +
+                    "QUANTIDADE = ?," +
+                    "DESCRICAO = ?, where codigo = ?";
+            PreparedStatement stmtAL = conAL.prepareStatement(sqlAL);
+            stmtAL.setString(1, pd.getNomeProduto());
+            stmtAL.setString(2, pd.getCor());
+            stmtAL.setInt(3, pd.getCodMarca());
+            stmtAL.setInt(4, pd.getCodCategoria());
+            stmtAL.setInt(5, pd.getCodTamanho());
+            stmtAL.setDouble(6, pd.getPreco());
+            stmtAL.setInt(7, pd.getQuantidade());
+            stmtAL.setString(8, pd.getDescricao());
+            stmtAL.setInt(9, pd.getCodProduto());
+            int rs = stmtAL.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
