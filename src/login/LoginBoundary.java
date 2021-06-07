@@ -3,11 +3,10 @@ package login;
 import funcionario.FuncionarioBoundary;
 import funcionario.FuncionarioController;
 import javafx.application.Application;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableMapValue;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -19,7 +18,9 @@ import java.io.FileInputStream;
 public class LoginBoundary extends Application {
 
     private TextField txtEmail = new TextField();
-    private TextField txtSenha = new TextField();
+    private PasswordField txtSenha = new PasswordField();
+
+    private CheckBox check = new CheckBox();
 
     private Button btnEntrar = new Button("Entrar");
 
@@ -60,9 +61,11 @@ public class LoginBoundary extends Application {
         txtSenha.relocate(140, 240);
         txtSenha.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
 
+        check.relocate(370,240);
+
         btnEntrar.relocate(225, 280);
 
-        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo);
+        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo, check);
 
         btnEntrar.setOnAction((e) -> {
             permitido = logControl.validarLogin(boundaryToEntity());
@@ -84,6 +87,7 @@ public class LoginBoundary extends Application {
                 alertWarn.showAndWait();
             }
         });
+
 
         primaryStage.setScene(scCeneLogin);
         primaryStage.setTitle("Login S2");

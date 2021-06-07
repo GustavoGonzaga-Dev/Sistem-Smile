@@ -34,6 +34,7 @@ public class TamanhoBoundary extends Application {
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneTamanho = new Scene(pPane, 400, 250);
+        TamanhoController.valida(txtCodigo,txtPesquisar);
 
         Label lblCodigo = new Label("Codigo:");
         Label lblTamanho = new Label("Tamanho:");

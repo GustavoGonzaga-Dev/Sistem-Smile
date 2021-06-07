@@ -33,6 +33,7 @@ public class MarcaBoundary extends Application {
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneMarca = new Scene(pPane, 400, 250);
+        MarcaController.valida(txtCodigo,txtPesquisar);
 
         Label lblCodigo = new Label("Codigo:");
         Label lblNome = new Label("Nome:");
