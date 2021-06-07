@@ -34,6 +34,7 @@ public class CategoriaBoundary extends Application {
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneCategoria = new Scene(pPane, 400, 250);
+        CategoriaController.valida(txtCodigo,txtPesquisar);
 
         Label lblCodigo = new Label("Codigo:");
         Label lblCategoria = new Label("Categoria:");

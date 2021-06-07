@@ -32,7 +32,9 @@ public class ProdutoBoundary extends Application {
     private TextField txtDescricao = new TextField();
 
     private Button btnAdicionar = new Button("Adicionar");
-    private Button btnFechar = new Button("Fechar");
+    private Button btnAlterar = new Button("Alterar");
+    private Button btnExcluir = new Button("Excluir");
+    private Button btnConcluir = new Button("Concluir");
 
     ProdutoController prodCont = new ProdutoController();
     private MarcaController mcControl = new MarcaController();
@@ -43,12 +45,16 @@ public class ProdutoBoundary extends Application {
     private String cbTamanhoValue;
     private String cbCategoriaValue;
 
+    private String cssBorda =   "-fx-border-color: grey;\n" +
+                                "-fx-border-insets: 3;\n" +
+                                "-fx-border-width: 1;\n" ;
+
     private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
     private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
 
     private HBox addBox() {
         HBox hbox = new HBox();
-        hbox.setPadding(new Insets(20, 15, 20, 15));
+        hbox.setPadding(new Insets(20, 10, 20, 15));
         hbox.setSpacing(10);
         return hbox;
     }
@@ -58,7 +64,7 @@ public class ProdutoBoundary extends Application {
         BorderPane border = new BorderPane();
         HBox hbox = addBox();
         border.setTop(hbox);
-        border.setLeft(addBox());
+
 
         btnAdicionar.setVisible(true);
         txtNome.setEditable(true);
@@ -70,6 +76,9 @@ public class ProdutoBoundary extends Application {
         cbTamanho.setDisable(false);
         cbMarca.setDisable(false);
         cbCategoria.setDisable(false);
+        btnConcluir.setVisible(false);
+        btnAlterar.setVisible(false);
+        btnExcluir.setVisible(false);
 
         carregarCombo();
 
@@ -89,40 +98,87 @@ public class ProdutoBoundary extends Application {
         Label lblQuantidade = new Label("Quantidade em Estoque:");
         Label lblDescricao = new Label("Descrição:");
 
-        gridPane.add(lblNome,0,0);
-        gridPane.add(txtNome,1,0);
-        gridPane.add(lblCodigo,0,1);
-        gridPane.add(txtCodigo,1,1);
-        gridPane.add(lblCor,2,1);
-        gridPane.add(txtCor,3,1);
-        gridPane.add(lblMarca,0,2);
-        gridPane.add(cbMarca,1,2);
-        gridPane.add(lblCategoria, 0,3);
-        gridPane.add(cbCategoria,1,3);
-        gridPane.add(lblTamanho,3,3);
-        gridPane.add(cbTamanho,4,3);
-        gridPane.add(lblPreco,0,4);
-        gridPane.add(txtPreco,1,4);
-        gridPane.add(lblQuantidade,2,4);
-        gridPane.add(txtQuantidade,3,4);
-        gridPane.add(lblDescricao,0,5);
+        gridPane.add(lblNome,0,1);
+        gridPane.add(txtNome,1,1);
+        gridPane.add(lblCodigo,0,2);
+        gridPane.add(txtCodigo,1,2);
+        gridPane.add(lblCor,2,2);
+        gridPane.add(txtCor,3,2);
+        gridPane.add(lblMarca,0,3);
+        gridPane.add(cbMarca,1,3);
+        gridPane.add(lblCategoria, 0,4);
+        gridPane.add(cbCategoria,1,4);
+        gridPane.add(lblTamanho,3,4);
+        gridPane.add(cbTamanho,4,4);
+        gridPane.add(lblPreco,0,5);
+        gridPane.add(txtPreco,1,5);
+        gridPane.add(lblQuantidade,2,5);
+        gridPane.add(txtQuantidade,3,5);
+        gridPane.add(lblDescricao,0,6);
+        gridPane.setStyle(cssBorda);
         txtDescricao.getStylesheets().add(ProdutoBoundary.class.getResource("StylesProduto.css").toExternalForm());
 
+        BorderPane pane = new BorderPane();
         AnchorPane anchorPane = new AnchorPane();
         HBox box = new HBox();
         box.setPadding(new Insets(0,40,10,20));
         box.setSpacing(10);
         box.getChildren().addAll(txtDescricao, btnAdicionar);
-        anchorPane.getChildren().addAll( box);
-        AnchorPane.setBottomAnchor(box,8.0);
-        AnchorPane.setRightAnchor(box,5.0);
-        border.setBottom(anchorPane);
+        anchorPane.getChildren().addAll(box);
+        HBox box2 = new HBox();
+        box2.getChildren().addAll(btnAlterar,btnConcluir,btnExcluir);
+        box2.setPadding(new Insets(2,0,5,250));
+        box2.setSpacing(20);
 
+        pane.setTop(anchorPane);
+        pane.setBottom(box2);
+
+          border.setBottom(pane);
         btnAdicionar.setOnAction((event -> {
             prodCont.adicionar(boundaryToEntity());
             this.entityToBoundary(new Produto());
             alertMess.setHeaderText("CADASTRADO COM SUCESSO!");
             alertMess.showAndWait();
+        }));
+
+        btnExcluir.setOnAction((event -> {
+            try{
+                prodCont.excluir(Integer.parseInt(txtCodigo.getText()));
+            }catch (Exception e){
+
+            }
+            alertMess.setHeaderText("EXCLUIDO COM SUCESSO!");
+            alertMess.showAndWait();
+            btnAlterar.setVisible(false);
+            btnExcluir.setVisible(false);
+            stage.close();
+        }));
+
+        btnAlterar.setOnAction((event -> {
+            txtNome.setEditable(true);
+            txtCor.setEditable(true);
+            txtPreco.setEditable(true);
+            txtQuantidade.setEditable(true);
+            txtDescricao.setEditable(true);
+            cbTamanho.setDisable(false);
+            cbMarca.setDisable(false);
+            cbCategoria.setDisable(false);
+
+            btnExcluir.setVisible(false);
+            btnConcluir.setVisible(true);
+            btnAlterar.setVisible(false);
+
+
+        }));
+
+        btnConcluir.setOnAction((event -> {
+
+            prodCont.alterar(boundaryToEntity());
+            alertMess.setHeaderText("ALTERADO COM SUCESSO!");
+            alertMess.showAndWait();
+            btnConcluir.setVisible(false);
+
+            stage.close();
         }));
 
         stage.setResizable(false);
@@ -196,6 +252,8 @@ public class ProdutoBoundary extends Application {
     public void pesquisar(int cod){
         entityToBoundary(prodCont.pesquisarPorCodigo(cod));
         btnAdicionar.setVisible(false);
+        btnAlterar.setVisible(true);
+        btnExcluir.setVisible(true);
         txtNome.setEditable(false);
         txtCodigo.setEditable(false);
         txtCor.setEditable(false);
@@ -205,6 +263,7 @@ public class ProdutoBoundary extends Application {
         cbTamanho.setDisable(true);
         cbMarca.setDisable(true);
         cbCategoria.setDisable(true);
+        btnConcluir.setVisible(false);
     }
 
 }

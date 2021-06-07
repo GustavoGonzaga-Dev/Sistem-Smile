@@ -90,6 +90,7 @@ public class EstoqueBoundary extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        EstoqueController.valida(txtBusca);
         BorderPane borderPane = new BorderPane();
         HBox hbox = addBox();
         borderPane.setTop(hbox);
