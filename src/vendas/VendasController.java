@@ -1,13 +1,18 @@
 package vendas;
 
-import java.sql.*;
-import java.util.Collections;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.awt.*;
+import java.util.Arrays;
 import java.util.List;
 
 public class VendasController {
-    public static final String URL = "jdbc:mariadb://localhost:3306/LOJA";
-    public static final String USER = "root";
-    public static final String PASSWORD = "";
+
 
     Vendas v1 = new Vendas();
     Vendas v2 = new Vendas();
@@ -60,4 +65,127 @@ public class VendasController {
             v3.setSituacao(vd.getSituacao());
         }
     }
-}
+
+    private ObservableList<Tabela> tabelas = FXCollections.observableArrayList();
+    TableView < Tabela > table = new TableView<>();
+    public void geraTabela() {
+        List<Tabela> tabelas = Arrays.asList(
+                t1 = new Tabela(1, "Camisa", 10, 25.00),
+                t2 = new Tabela(2, "Toca do Zé", 1, 400.00),
+                t3 = new Tabela(3, "Blusa Preta Ardidas", 3, 200.00));
+
+        TableColumn<Tabela, Integer> codigoProduto = new TableColumn("Código do produto");
+        TableColumn<Tabela, String> nomeProduto = new TableColumn("Nome");
+        TableColumn<Tabela, Integer> quantidade = new TableColumn("Qtd");
+        TableColumn<Tabela, Double> preco = new TableColumn("Valor");
+
+        codigoProduto.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
+        nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        preco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+
+        table.setItems(FXCollections.observableArrayList(tabelas));
+        table.getColumns().addAll(codigoProduto,nomeProduto,quantidade,preco);
+    }
+
+        private  SimpleIntegerProperty codigoProduto;
+        private  SimpleStringProperty nomeProduto;
+        private  SimpleIntegerProperty quantidade;
+        private  SimpleDoubleProperty preco;
+
+//        public void setando() {
+//            t1.setCodigoProduto(1);
+//            t1.setNomeProduto("Camisa Nike");
+//            t1.setQuantidade(4);
+//            t1.setPreco(200.00);
+//
+//            t2.setCodigoProduto(2);
+//            t2.setNomeProduto("Toca do Zé");
+//            t2.setQuantidade(2);
+//            t2.setPreco(10.00);
+//
+//            t3.setCodigoProduto(3);
+//            t3.setNomeProduto("Blusa Preta Puma");
+//            t3.setQuantidade(5);
+//            t3.setPreco(230.00);
+//            codigoProduto.set(t.getCodigoProduto());
+//            nomeProduto.set(t.getNomeProduto());
+//            quantidade.set(t.getQuantidade());
+//            preco.set(t.getPreco());
+//        }
+      Tabela t1 ;
+      Tabela t2 ;
+      Tabela t3 ;
+
+//        public void pegando() {
+//            t1.getCodigoProduto();
+//
+//        }
+
+
+//        public Tabelas(Integer codigoProduto, String nomeProduto, Integer quantidade, Double preco){
+//            this.codigoProduto = new SimpleIntegerProperty(codigoProduto);
+//            this.nomeProduto = new SimpleStringProperty(nomeProduto);
+//            this.quantidade = new SimpleIntegerProperty(quantidade);
+//            this.preco = new SimpleDoubleProperty(preco);
+//        }
+
+//        private ObservableList<Tabela> tabela = FXCollections.observableArrayList();
+
+//                new Tabela(1,"Camisa kiki tenis",4,200.00),
+//                new Tabela(2,"Calça tico-tico",3,100.00),
+//                new Tabela(3,"Toca do Zé",2,20.00),
+//                new Tabela(4,"Blusa verdinha quentinha",1,400.0)
+
+        public TableView<Tabela> getTable(){
+            return table;
+        }
+    
+        public int getCodigoProduto() {
+            return codigoProduto.get();
+        }
+
+        public SimpleIntegerProperty codigoProdutoProperty() {
+            return codigoProduto;
+        }
+
+        public void setCodigoProduto(int codigoProduto) {
+            this.codigoProduto.set(codigoProduto);
+        }
+
+        public String getNomeProduto() {
+            return nomeProduto.get();
+        }
+
+        public SimpleStringProperty nomeProdutoProperty() {
+            return nomeProduto;
+        }
+
+        public void setNomeProduto(String nomeProduto) {
+            this.nomeProduto.set(nomeProduto);
+        }
+
+        public int getQuantidade() {
+            return quantidade.get();
+        }
+
+        public SimpleIntegerProperty quantidadeProperty() {
+            return quantidade;
+        }
+
+        public void setQuantidade(int quantidade) {
+            this.quantidade.set(quantidade);
+        }
+
+        public double getPreco() {
+            return preco.get();
+        }
+
+        public SimpleDoubleProperty precoProperty() {
+            return preco;
+        }
+
+        public void setPreco(double preco) {
+            this.preco.set(preco);
+        }
+    }
