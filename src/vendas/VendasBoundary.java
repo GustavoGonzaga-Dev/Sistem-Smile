@@ -27,6 +27,8 @@ public class VendasBoundary extends Application {
     private TableView table = new TableView();
 
     private VendasController vendaControl = new VendasController();
+    private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
+    private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
 
     @Override
     public void start(Stage stage) {
@@ -57,6 +59,14 @@ public class VendasBoundary extends Application {
         TableColumn nomeProduto = new TableColumn("Nome");
         TableColumn quantidade = new TableColumn("Qtd");
         TableColumn preco = new TableColumn("Valor");
+
+        txtTotal.setEditable(false);
+        txtEndereco.setEditable(false);
+        txtNome.setEditable(false);
+        txtData.setEditable(false);
+        txtCodigoCliente.setEditable(false);
+        btnAlterarStatus.setDisable(true);
+        cbSituacao.setDisable(true);
 
         lblCodigo.relocate(60, 10);
         txtCodigo.relocate(40, 30);
@@ -96,14 +106,20 @@ public class VendasBoundary extends Application {
                 lblTotal, txtTotal, btnPesq);
 
         btnAlterarStatus.setOnAction((event -> {
-            cbSituacao.getValue();
+            vendaControl.alterar(boundaryToEntity());
+            alertMess.setHeaderText("ALTERADO COM SUCESSO!");
+            alertMess.showAndWait();
+            entityToBoundary(new Vendas());
         }));
 
         btnPesq.setOnAction((event -> {
-             vendaControl.pesquisaCodigo(Integer.parseInt(txtCodigo.getText()));
+            entityToBoundary(vendaControl.pesquisaCodigo(Integer.parseInt(txtCodigo.getText())));
+            cbSituacao.setDisable(false);
+            btnAlterarStatus.setDisable(false);
         }));
 
         btnFechar.setOnAction((event -> {
+            entityToBoundary(new Vendas());
             stage.close();
         }));
 
@@ -114,19 +130,23 @@ public class VendasBoundary extends Application {
     }
 
     public void entityToBoundary(Vendas vd) { //consultando a entidade e jogando na tela
-        if (vd != null) {
+        if(vd != null) {
             txtCodigo.setText(String.valueOf(vd.getCodigoVenda()));
             txtNome.setText(vd.getNomeCliente());
             txtCodigoCliente.setText(String.valueOf(vd.getCodigoCliente()));
-            txtData.setText(String.valueOf(vd.getData()));
+            txtData.setText(vd.getData());
             txtEndereco.setText(String.valueOf(vd.getEndereco()));
-            txtTotal.setText(String.valueOf(vd.getValorTotal()));
             cbSituacao.setValue(String.valueOf(vd.getSituacao()));
-
-
-        } else {
-
+        }else{
+        alertWarn.setHeaderText("VENDA NÃO EXISTE");
+        alertWarn.showAndWait();
         }
     }
 
+    public Vendas boundaryToEntity(){
+        Vendas vd = new Vendas();
+        vd.setCodigoVenda(Integer.parseInt(txtCodigo.getText()));
+        vd.setSituacao(cbSituacao.getValue());
+        return vd;
+    }
 }

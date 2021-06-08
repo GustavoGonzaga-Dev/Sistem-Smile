@@ -1,19 +1,12 @@
 package vendas;
 
-import java.util.Date;
-
 public class Vendas {
     private int codigoVenda;
     private int codigoCliente;
     private String nomeCliente;
     private String endereco;
-    private Date data;
+    private String data;
     private String situacao;
-    private int codigoProduto;
-    private String nomeProduto;
-    private int quantidadeProduto;
-    private Double valorUnitario;
-    private Double valorTotal;
 
     public int getCodigoVenda() {
         return codigoVenda;
@@ -47,11 +40,11 @@ public class Vendas {
         this.endereco = endereco;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -63,43 +56,4 @@ public class Vendas {
         this.situacao = situacao;
     }
 
-    public int getCodigoProduto() {
-        return codigoProduto;
-    }
-
-    public void setCodigoProduto(int codigoProduto) {
-        this.codigoProduto = codigoProduto;
-    }
-
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
-    public int getQuantidadeProduto() {
-        return quantidadeProduto;
-    }
-
-    public void setQuantidadeProduto(int quantidadeProduto) {
-        this.quantidadeProduto = quantidadeProduto;
-    }
-
-    public Double getValorUnitario() {
-        return valorUnitario;
-    }
-
-    public void setValorUnitario(Double valorUnitario) {
-        this.valorUnitario = valorUnitario;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
 }
