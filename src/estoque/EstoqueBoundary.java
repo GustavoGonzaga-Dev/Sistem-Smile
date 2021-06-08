@@ -23,7 +23,7 @@ public class EstoqueBoundary extends Application {
     private Button btnMarca ;
     private Button btnAdicionar ;
     private Button btnPesquisar = new Button("Pesquisar");
-    private Button btnFechar = new Button(" Fechar");
+    private Button btnFechar;
 
     private Label lblInfo = new Label("*Para pesquisar, insira o \n" +" codigo do produto.");
 
@@ -58,6 +58,7 @@ public class EstoqueBoundary extends Application {
         VBox vbox2 = new VBox();
         VBox vbox3 = new VBox();
         VBox vbox4 = new VBox();
+        VBox vbox5 = new VBox();
 
         vbox.setPadding(new Insets(10));
         vbox.setSpacing(8);
@@ -67,6 +68,7 @@ public class EstoqueBoundary extends Application {
                 btnCategoria = new Button("Gerenciar Categorias"),
                 btnTamanho = new Button("Gerenciar Tamanhos"),
                 btnMarca = new Button("Gerenciar Marcas"),
+                btnFechar = new Button("Fechar"),
          };
         VBox.setMargin(btns[0], new Insets(8, 5, 8, 5));
         vbox1.getChildren().add(btns[0]);
@@ -84,7 +86,10 @@ public class EstoqueBoundary extends Application {
         vbox4.getChildren().add(btns[3]);
         vbox4.setStyle(cssLayout);
         vbox4.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(vbox1,vbox2,vbox3,vbox4);
+        VBox.setMargin(btns[4], new Insets(4, 5, 4, 5));
+        vbox5.getChildren().add(btns[4]);
+        vbox5.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(vbox1,vbox2,vbox3,vbox4,vbox5);
         return vbox;
     }
 
