@@ -14,6 +14,7 @@ import marca.MarcaBoundary;
 import produto.Produto;
 import produto.ProdutoBoundary;
 import tamanho.TamanhoBoundary;
+import vendas.Vendas;
 
 public class EstoqueBoundary extends Application {
 
@@ -22,6 +23,7 @@ public class EstoqueBoundary extends Application {
     private Button btnMarca ;
     private Button btnAdicionar ;
     private Button btnPesquisar = new Button("Pesquisar");
+    private Button btnFechar = new Button(" Fechar");
 
     private Label lblInfo = new Label("*Para pesquisar, insira o \n" +" codigo do produto.");
 
@@ -152,6 +154,10 @@ public class EstoqueBoundary extends Application {
                 exception.printStackTrace();
             }
 
+        }));
+
+        btnFechar.setOnAction((event -> {
+            stage.close();
         }));
 
         stage.setScene(scCeneEstoque);
