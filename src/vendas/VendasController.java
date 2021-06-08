@@ -75,9 +75,9 @@ public class VendasController {
     }
 
     public void geraTabela() {
-        TableColumn<Tabela, Integer> codigoProduto = new TableColumn("Código do produto");
+        TableColumn<Tabela, Integer> codigoProduto = new TableColumn("Código");
         TableColumn<Tabela, String> nomeProduto = new TableColumn("Nome");
-        TableColumn<Tabela, Integer> quantidade = new TableColumn("Qtd");
+        TableColumn<Tabela, Integer> quantidade = new TableColumn("Quantidade");
         TableColumn<Tabela, Double> preco = new TableColumn("Valor");
 
         codigoProduto.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
