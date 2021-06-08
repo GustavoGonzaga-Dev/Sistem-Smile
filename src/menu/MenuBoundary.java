@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import vendas.VendasBoundary;
 
 
 public class MenuBoundary extends Application {
@@ -22,6 +23,7 @@ public class MenuBoundary extends Application {
 
     private FuncionarioBoundary funcTela = new FuncionarioBoundary();
     private EstoqueBoundary estTela = new EstoqueBoundary();
+    private VendasBoundary vendTela = new VendasBoundary();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -55,6 +57,15 @@ public class MenuBoundary extends Application {
             Stage stageEst = new Stage();
             try {
                 estTela.start(stageEst);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }));
+
+        btnVenda.setOnAction((event -> {
+            Stage stageVend = new Stage();
+            try {
+                vendTela.start(stageVend);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
