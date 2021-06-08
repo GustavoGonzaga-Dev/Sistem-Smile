@@ -144,6 +144,7 @@ public class EstoqueBoundary extends Application {
             try {
                 produtoTela.start(stageProduto);
                 produtoTela.entityToBoundary(new Produto());
+                stage.close();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

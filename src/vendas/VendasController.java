@@ -1,13 +1,23 @@
 package vendas;
 
-import java.sql.*;
-import java.util.Collections;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.Arrays;
 import java.util.List;
 
 public class VendasController {
-    public static final String URL = "jdbc:mariadb://localhost:3306/LOJA";
-    public static final String USER = "root";
-    public static final String PASSWORD = "";
+    Tabela t1;
+    Tabela t2;
+    Tabela t3;
+
+    List<Tabela> tabelas = Arrays.asList(t1 = new Tabela(1, "Camisa", 10, 25.00),
+            t2 = new Tabela(2, "Toca do Zé", 1, 400.00),
+            t3 = new Tabela(3, "Blusa Preta Ardidas", 3, 200.00));
+
+    TableView < Tabela > table = new TableView<>();
 
     Vendas v1 = new Vendas();
     Vendas v2 = new Vendas();
@@ -42,10 +52,13 @@ public class VendasController {
         }
         switch (codigo){
             case 1:
+                printarTable(codigo);
                 return v1;
             case 2:
+                printarTable(codigo);
                 return v2;
             case 3:
+                printarTable(codigo);
                 return v3;
         }
         return null;
@@ -60,4 +73,61 @@ public class VendasController {
             v3.setSituacao(vd.getSituacao());
         }
     }
-}
+
+    public void geraTabela() {
+        TableColumn<Tabela, Integer> codigoProduto = new TableColumn("Código");
+        TableColumn<Tabela, String> nomeProduto = new TableColumn("Nome");
+        TableColumn<Tabela, Integer> quantidade = new TableColumn("Quantidade");
+        TableColumn<Tabela, Double> preco = new TableColumn("Valor");
+
+        codigoProduto.setCellValueFactory(new PropertyValueFactory<>("codigoProduto"));
+        nomeProduto.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        preco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+
+        table.getColumns().addAll(codigoProduto,nomeProduto,quantidade,preco);
+
+        table.setMinSize(320, 300);
+        table.setMaxSize(320, 300);
+        table.setEditable(false);
+        table.getItems().clear();
+    }
+
+    public void printarTable(int codigo){
+        switch (codigo){
+            case 1:
+                table.getItems().clear();
+                table.setItems(FXCollections.observableArrayList(tabelas));
+                break;
+            case 2:
+                table.getItems().clear();
+                table.setItems(FXCollections.observableArrayList(t2));
+                break;
+            case 3:
+                table.getItems().clear();
+                table.setItems(FXCollections.observableArrayList(t3, t1));
+                break;
+        }
+    }
+
+    public double total(int codigo){
+        switch (codigo){
+            case 1:
+                return 1250;
+            case 2:
+                return 400;
+            case 3:
+                return 850;
+        }
+        return 0;
+    }
+
+        private  SimpleIntegerProperty codigoProduto;
+        private  SimpleStringProperty nomeProduto;
+        private  SimpleIntegerProperty quantidade;
+        private  SimpleDoubleProperty preco;
+
+        public TableView<Tabela> getTable(){
+            return table;
+        }
+    }
