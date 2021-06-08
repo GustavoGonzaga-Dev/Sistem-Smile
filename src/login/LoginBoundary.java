@@ -3,8 +3,7 @@ package login;
 import funcionario.FuncionarioBoundary;
 import funcionario.FuncionarioController;
 import javafx.application.Application;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableMapValue;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -17,10 +16,11 @@ import java.io.FileInputStream;
 
 public class LoginBoundary extends Application {
 
+    private TextField password = new TextField();
     private TextField txtEmail = new TextField();
     private PasswordField txtSenha = new PasswordField();
 
-    private CheckBox check = new CheckBox();
+    private CheckBox check = new CheckBox("Mostrar Senha");
 
     private Button btnEntrar = new Button("Entrar");
 
@@ -61,11 +61,26 @@ public class LoginBoundary extends Application {
         txtSenha.relocate(140, 240);
         txtSenha.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
 
-        check.relocate(370,240);
+        check.relocate(370,243);
+        check.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)->{
+            if(check.isSelected()){
+                password.setText(txtSenha.getText());
+                password.setVisible(true);
+                txtSenha.setVisible(false);
+                return;
+            }
+            txtSenha.setText(password.getText());
+            txtSenha.setVisible(true);
+            password.setVisible(false);
+        });
+        password.setVisible(false);
+        password.relocate(140,240);
+        password.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
 
         btnEntrar.relocate(225, 280);
 
-        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo, check);
+        pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo, check, password);
+
 
         btnEntrar.setOnAction((e) -> {
             permitido = logControl.validarLogin(boundaryToEntity());
