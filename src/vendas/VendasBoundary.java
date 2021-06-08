@@ -1,19 +1,12 @@
 package vendas;
 
-import funcionario.Funcionario;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class VendasBoundary extends Application {
     private TextField txtNome = new TextField();
@@ -30,18 +23,14 @@ public class VendasBoundary extends Application {
     private Button btnAlterarStatus = new Button("Alterar");
     private Button btnFechar = new Button("Fechar");
 
-
     private VendasController vendaControl = new VendasController();
     private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
     private Alert alertMess = new Alert(Alert.AlertType.INFORMATION);
-
-
 
     @Override
     public void start(Stage stage) {
         Pane pPane = new Pane();
         Scene scCeneVenda = new Scene(pPane, 700, 550);
-        vendaControl.geraTabela();
         Rectangle shape = new Rectangle();
         shape.setHeight(250);
         shape.setWidth(200);
@@ -51,7 +40,7 @@ public class VendasBoundary extends Application {
         shape.setFill(Color.TRANSPARENT);
         shape.setStroke(Color.GRAY);
 
-//        table.setMinSize(350,200);
+        vendaControl.geraTabela();
         cbSituacao.getItems().addAll(status);
 
         Label lblCodigo = new Label("Codigo da venda:");
@@ -61,8 +50,6 @@ public class VendasBoundary extends Application {
         Label lblData = new Label("Data:");
         Label lblSituacao = new Label("Situação de venda:");
         Label lblTotal = new Label("Valor total:");
-
-
 
         txtTotal.setEditable(false);
         txtEndereco.setEditable(false);
@@ -90,10 +77,6 @@ public class VendasBoundary extends Application {
         lblSituacao.relocate(60, 400);
         cbSituacao.relocate(60, 420);
 
-//          table.relocate(300, 20);
-//        table.getColumns().addAll(codigoProduto, nomeProduto, quantidade, preco);
-//        codigoProduto.prefWidthProperty().bind(table.widthProperty().multiply(0.38));
-
         vendaControl.getTable().relocate(300,20);
         pPane.getChildren().addAll(vendaControl.getTable());
         lblTotal.relocate(330, 440);
@@ -119,6 +102,7 @@ public class VendasBoundary extends Application {
 
         btnPesq.setOnAction((event -> {
             entityToBoundary(vendaControl.pesquisaCodigo(Integer.parseInt(txtCodigo.getText())));
+            txtTotal.setText(String.valueOf(vendaControl.total(Integer.parseInt(txtCodigo.getText()))));
             cbSituacao.setDisable(false);
             btnAlterarStatus.setDisable(false);
         }));
@@ -154,15 +138,4 @@ public class VendasBoundary extends Application {
         vd.setSituacao(cbSituacao.getValue());
         return vd;
     }
-
-
-//    private ObservableList<VendasController.Tabela> ListaProdutos(){
-//        return FXCollections.observableArrayList(
-//                new VendasController.Tabela(1,"Camisa kiki tenis",4,200.00),
-//                new VendasController.Tabela(2,"Calça tico-tico",3,100.00),
-//                new VendasController.Tabela(3,"Toca do Zé",2,20.00),
-//                new VendasController.Tabela(4,"Blusa verdinha quentinha",1,400.0)
-//        );
-//    }
-
 }
