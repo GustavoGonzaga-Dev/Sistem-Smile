@@ -3,9 +3,7 @@
     -fx-faint-focus-color: transparent;
     -fx-focus-color: rgb(251, 156, 88);
 }
-.table-row-cell:selected{
-    -fx-background-color:rgb(251, 156, 88) ;
-}
+
 
 .label{
     -fx-font-size: 10;

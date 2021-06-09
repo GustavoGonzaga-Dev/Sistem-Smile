@@ -30,6 +30,7 @@ public class VendasBoundary extends Application {
     @Override
     public void start(Stage stage) {
         Pane pPane = new Pane();
+        pPane.getStylesheets().add(VendasBoundary.class.getResource("StylesVendas.css").toExternalForm());
         Scene scCeneVenda = new Scene(pPane, 700, 550);
         Rectangle shape = new Rectangle();
         shape.setHeight(250);

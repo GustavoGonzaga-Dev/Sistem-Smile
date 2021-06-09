@@ -1,0 +1,17 @@
+.table-row-cell:selected{
+    -fx-background-color:rgb(251, 156, 88) ;
+}
+
+.label{
+    -fx-font-size: 12;
+}
+
+.table-view {
+    -fx-base: #BDBDBD;
+    -fx-control-inner-background: #D3D3D3;
+    -fx-background-color: #D3D3D3;
+    -fx-font-size: 12;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 1;
+}

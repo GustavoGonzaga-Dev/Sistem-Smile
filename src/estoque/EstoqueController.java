@@ -40,6 +40,7 @@ public class EstoqueController {
         tableEstoque.setMaxSize(440, 410);
         tableEstoque.setEditable(false);
         tableEstoque.getItems().clear();
+        tableEstoque.getStylesheets().add(EstoqueController.class.getResource("StylesTabela.css").toExternalForm());
 
     }
 

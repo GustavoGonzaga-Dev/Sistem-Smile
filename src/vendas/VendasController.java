@@ -1,5 +1,6 @@
 package vendas;
 
+import estoque.EstoqueController;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
@@ -86,6 +87,7 @@ public class VendasController {
         preco.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
         table.getColumns().addAll(codigoProduto,nomeProduto,quantidade,preco);
+        table.getStylesheets().add(VendasController.class.getResource("StylesVendas.css").toExternalForm());
 
         table.setMinSize(320, 300);
         table.setMaxSize(320, 300);
