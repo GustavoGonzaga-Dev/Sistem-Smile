@@ -101,16 +101,18 @@ public class EstoqueBoundary extends Application {
         BorderPane borderPane = new BorderPane();
         HBox hbox = addBox();
         borderPane.setTop(hbox);
+        control.colocarValores();
+        control.Tabela();
+        borderPane.setCenter(control.getTable());
 
         VBox vbox = addVbox();
         vbox.setAlignment(Pos.CENTER);
         borderPane.setRight(vbox);
 
-        Scene scCeneEstoque = new Scene(borderPane, 650, 360);
+        Scene scCeneEstoque = new Scene(borderPane, 650, 400);
         btnAdicionar.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
 
-        control.Tabela();
-        borderPane.setCenter(control.getTable());
+
 
         btnCategoria.setOnAction((event -> {
             Stage stageCategoria = new Stage();

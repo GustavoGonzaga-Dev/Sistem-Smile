@@ -12,12 +12,12 @@ public class EstoqueDAOImpl implements EstoqueDAO{
     public static final String PASSWORD = "";
 
 
-    public List<Estoque> colocarValores(String nomeProduto){
+    public List<Estoque> colocarValores(){
         List<Estoque> lista = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String sql = "SELECT CODIGO_PRODUTO,NOME_PRODUTO,QUANTIDADE,PRECO FROM PRODUTO WHERE NOME_PRODUTO LIKE ?";
+            String sql = "SELECT CODIGO_PRODUTO,NOME_PRODUTO,QUANTIDADE,PRECO FROM PRODUTO";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, "%" + nomeProduto  + "%");
+            //stmt.setString(1, "%" + nomeProduto  + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Estoque est = new Estoque();
@@ -28,6 +28,7 @@ public class EstoqueDAOImpl implements EstoqueDAO{
 
                 lista.add(est);
             }
+            return lista;
         } catch (SQLException e) {
             e.printStackTrace();
         }

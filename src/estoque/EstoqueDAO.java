@@ -3,6 +3,6 @@ package estoque;
 import java.util.List;
 
 public interface EstoqueDAO {
-    List<Estoque> colocarValores(String nomeProduto);
+    List<Estoque> colocarValores();
 
 }
