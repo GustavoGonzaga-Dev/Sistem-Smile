@@ -118,7 +118,7 @@ public class VendasBoundary extends Application {
         stage.show();
     }
 
-    public void entityToBoundary(Vendas vd) { //consultando a entidade e jogando na tela
+    public void entityToBoundary(Vendas vd) {
         if(vd != null) {
             txtCodigo.setText(String.valueOf(vd.getCodigoVenda()));
             txtNome.setText(vd.getNomeCliente());

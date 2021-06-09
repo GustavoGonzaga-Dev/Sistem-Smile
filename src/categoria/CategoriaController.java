@@ -3,13 +3,12 @@ package categoria;
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriaController {
 
-    CategoriaDAO ctd = new CategoriaDAOImpl();
+    private CategoriaDAO ctd = new CategoriaDAOImpl();
 
     public void adicionar(Categoria Ct) {
         ctd.adicionar(Ct);

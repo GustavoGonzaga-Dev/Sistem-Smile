@@ -148,7 +148,7 @@ public class MarcaBoundary extends Application {
         Stage.show();
     }
 
-    public Marca boundaryToEntity() { //jogando tudo que ta na tela, pra entidade
+    public Marca boundaryToEntity() {
         Marca Mc = new Marca();
         Mc.setNomeMarca(txtNome.getText());
         try {
@@ -159,7 +159,7 @@ public class MarcaBoundary extends Application {
         return Mc;
     }
 
-    public void entityToBoundary(Marca Mc) { //consultando a entidade e jogando na tela
+    public void entityToBoundary(Marca Mc) {
         if (Mc != null) {
             txtCodigo.setText(String.valueOf(Mc.getCodigo()));
             txtNome.setText(Mc.getNomeMarca());

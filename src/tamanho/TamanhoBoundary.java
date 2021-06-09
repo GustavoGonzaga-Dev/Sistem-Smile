@@ -149,7 +149,7 @@ public class TamanhoBoundary extends Application {
         Stage.show();
     }
 
-    public Tamanho boundaryToEntity() { //jogando tudo que ta na tela, pra entidade
+    public Tamanho boundaryToEntity() {
         Tamanho Tm = new Tamanho();
         Tm.setTamanho(txtTamanho.getText());
         try {
@@ -160,7 +160,7 @@ public class TamanhoBoundary extends Application {
         return Tm;
     }
 
-    public void entityToBoundary(Tamanho Tm) { //consultando a entidade e jogando na tela
+    public void entityToBoundary(Tamanho Tm) {
         if (Tm != null) {
             txtCodigo.setText(String.valueOf(Tm.getCodigo()));
             txtTamanho.setText(Tm.getTamanho());

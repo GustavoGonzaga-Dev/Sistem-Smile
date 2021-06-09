@@ -1,7 +1,6 @@
 package produto;
 
 import categoria.Categoria;
-import categoria.CategoriaBoundary;
 import categoria.CategoriaController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -9,12 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import marca.Marca;
-import marca.MarcaBoundary;
 import marca.MarcaController;
 import tamanho.Tamanho;
-import tamanho.TamanhoBoundary;
 import tamanho.TamanhoController;
 
 public class ProdutoBoundary extends Application {
@@ -64,7 +60,6 @@ public class ProdutoBoundary extends Application {
         BorderPane border = new BorderPane();
         HBox hbox = addBox();
         border.setTop(hbox);
-
 
         btnAdicionar.setVisible(true);
         txtNome.setEditable(true);
@@ -169,12 +164,9 @@ public class ProdutoBoundary extends Application {
             btnExcluir.setVisible(false);
             btnConcluir.setVisible(true);
             btnAlterar.setVisible(false);
-
-
         }));
 
         btnConcluir.setOnAction((event -> {
-
             prodCont.alterar(boundaryToEntity());
             alertMess.setHeaderText("ALTERADO COM SUCESSO!");
             alertMess.showAndWait();
@@ -210,7 +202,7 @@ public class ProdutoBoundary extends Application {
         return Pd;
     }
 
-    public boolean entityToBoundary(Produto Pd) { //consultando a entidade e jogando na tela
+    public boolean entityToBoundary(Produto Pd) {
         try {
             if (Pd != null) {
                 Marca mc;
@@ -266,11 +258,9 @@ public class ProdutoBoundary extends Application {
         cbCategoria.setDisable(true);
         btnConcluir.setVisible(false);
         btnAdicionar.setVisible(false);
-
         if(entityToBoundary(prodCont.pesquisarPorCodigo(cod))){
             btnAlterar.setVisible(true);
             btnExcluir.setVisible(true);
         }
     }
-
 }

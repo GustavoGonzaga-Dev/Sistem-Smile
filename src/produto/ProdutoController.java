@@ -1,9 +1,5 @@
 package produto;
 
-import funcionario.Funcionario;
-
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoController {

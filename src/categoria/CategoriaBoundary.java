@@ -149,7 +149,7 @@ public class CategoriaBoundary extends Application {
         Stage.show();
     }
 
-    public Categoria boundaryToEntity() { //jogando tudo que ta na tela, pra entidade
+    public Categoria boundaryToEntity() {
         Categoria Ct = new Categoria();
         Ct.setCategoria(txtCategoria.getText());
         try {
@@ -160,7 +160,7 @@ public class CategoriaBoundary extends Application {
         return Ct;
     }
 
-    public void entityToBoundary(Categoria Ct) { //consultando a entidade e jogando na tela
+    public void entityToBoundary(Categoria Ct) {
         if (Ct != null) {
             txtCodigo.setText(String.valueOf(Ct.getCodigo()));
             txtCategoria.setText(Ct.getCategoria());

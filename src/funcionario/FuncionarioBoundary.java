@@ -1,7 +1,6 @@
 package funcionario;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -10,8 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.File;
 
 public class FuncionarioBoundary extends Application {
@@ -249,7 +246,7 @@ public class FuncionarioBoundary extends Application {
         stage.show();
     }
 
-    public Funcionario boundaryToEntity() { //jogando tudo que ta na tela, pra entidade
+    public Funcionario boundaryToEntity() {
         Funcionario Fn = new Funcionario();
         if (valido) {
             Fn.setNome(txtNome.getText());
@@ -270,7 +267,7 @@ public class FuncionarioBoundary extends Application {
         return Fn;
     }
 
-    public void entityToBoundary(Funcionario Fn) { //consultando a entidade e jogando na tela
+    public void entityToBoundary(Funcionario Fn) {
         if (Fn != null) {
             txtCodigo.setText(String.valueOf(Fn.getCodigo()));
             txtNome.setText(Fn.getNome());
@@ -284,6 +281,4 @@ public class FuncionarioBoundary extends Application {
             alertMess.showAndWait();
         }
     }
-
-
 }

@@ -1,7 +1,5 @@
 package estoque;
 
-import funcionario.Funcionario;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,6 @@ public class EstoqueDAOImpl implements EstoqueDAO{
         try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD)) {
             String sql = "SELECT CODIGO_PRODUTO,NOME_PRODUTO,QUANTIDADE,PRECO FROM PRODUTO";
             PreparedStatement stmt = con.prepareStatement(sql);
-            //stmt.setString(1, "%" + nomeProduto  + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Estoque est = new Estoque();
@@ -25,7 +22,6 @@ public class EstoqueDAOImpl implements EstoqueDAO{
                 est.setNomeProduto(rs.getString("NOME_PRODUTO"));
                 est.setQuantidade(rs.getInt("QUANTIDADE"));
                 est.setValor(rs.getDouble("PRECO"));
-
                 lista.add(est);
             }
             return lista;

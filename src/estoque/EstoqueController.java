@@ -15,7 +15,6 @@ public class EstoqueController {
     private ObservableList<Estoque> lista = FXCollections.observableArrayList();
     private TableView<Estoque> tableEstoque = new TableView<>();
     private EstoqueDAO estoqueDAO = new EstoqueDAOImpl();
-    //private StringProperty nome = new SimpleStringProperty();
 
     public ObservableList<Estoque> coloca(){
         lista.clear();
@@ -59,7 +58,6 @@ public class EstoqueController {
                 txtField.setText(oldValue);
             }
         });
-
     }
 
     private static void posiciona(TextField txtField){

@@ -14,7 +14,6 @@ import marca.MarcaBoundary;
 import produto.Produto;
 import produto.ProdutoBoundary;
 import tamanho.TamanhoBoundary;
-import vendas.Vendas;
 
 public class EstoqueBoundary extends Application {
 
@@ -111,11 +110,8 @@ public class EstoqueBoundary extends Application {
         pane2.setTop(vbox);
         borderPane.setRight(pane2);
 
-
         Scene scCeneEstoque = new Scene(borderPane, 650, 400);
         btnAdicionar.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
-
-
 
         btnCategoria.setOnAction((event -> {
             Stage stageCategoria = new Stage();
@@ -177,6 +173,4 @@ public class EstoqueBoundary extends Application {
         stage.setResizable(false);
         stage.show();
     }
-
-
 }

@@ -13,36 +13,4 @@ public class Tabela {
         this.preco = preco;
 
     }
-
-    public int getCodigoProduto() {
-        return codigoProduto;
-    }
-
-    public void setCodigoProduto(int codigoProduto) {
-        this.codigoProduto = codigoProduto;
-    }
-
-    public String getNomeProduto() {
-        return nomeProduto;
-    }
-
-    public void setNomeProduto(String nomeProduto) {
-        this.nomeProduto = nomeProduto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
 }

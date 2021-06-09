@@ -81,7 +81,6 @@ public class LoginBoundary extends Application {
 
         pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo, check, password);
 
-
         btnEntrar.setOnAction((e) -> {
             permitido = logControl.validarLogin(boundaryToEntity());
 
@@ -103,14 +102,13 @@ public class LoginBoundary extends Application {
             }
         });
 
-
         primaryStage.setScene(scCeneLogin);
         primaryStage.setTitle("Login S2");
         primaryStage.setResizable(false);
         primaryStage.show();
     }
 
-    public Login boundaryToEntity() { //jogando tudo que ta na tela, pra entidade
+    public Login boundaryToEntity() {
         Login Lg = new Login();
         Lg.setEmail(txtEmail.getText());
         Lg.setSenha(txtSenha.getText());

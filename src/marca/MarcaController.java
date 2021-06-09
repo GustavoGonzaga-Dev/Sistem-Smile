@@ -2,8 +2,6 @@ package marca;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
-
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
