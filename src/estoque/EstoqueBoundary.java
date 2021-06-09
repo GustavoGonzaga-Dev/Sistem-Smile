@@ -107,7 +107,10 @@ public class EstoqueBoundary extends Application {
 
         VBox vbox = addVbox();
         vbox.setAlignment(Pos.CENTER);
-        borderPane.setRight(vbox);
+        BorderPane pane2 = new BorderPane();
+        pane2.setTop(vbox);
+        borderPane.setRight(pane2);
+
 
         Scene scCeneEstoque = new Scene(borderPane, 650, 400);
         btnAdicionar.getStylesheets().add(EstoqueBoundary.class.getResource("StylesEstoque.css").toExternalForm());
