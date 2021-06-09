@@ -33,6 +33,7 @@ public class TamanhoBoundary extends Application {
     @Override
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
+        pPane.getStylesheets().add(MarcaBoundary.class.getResource("StyleText.css").toExternalForm());
         Scene scCeneTamanho = new Scene(pPane, 400, 250);
         TamanhoController.valida(txtCodigo,txtPesquisar);
 
