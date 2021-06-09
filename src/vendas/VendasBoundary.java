@@ -102,10 +102,16 @@ public class VendasBoundary extends Application {
         }));
 
         btnPesq.setOnAction((event -> {
-            entityToBoundary(vendaControl.pesquisaCodigo(Integer.parseInt(txtCodigo.getText())));
-            txtTotal.setText(String.valueOf(vendaControl.total(Integer.parseInt(txtCodigo.getText()))));
-            cbSituacao.setDisable(false);
-            btnAlterarStatus.setDisable(false);
+            try{
+                entityToBoundary(vendaControl.pesquisaCodigo(Integer.parseInt(txtCodigo.getText())));
+                txtTotal.setText(String.valueOf(vendaControl.total(Integer.parseInt(txtCodigo.getText()))));
+                cbSituacao.setDisable(false);
+                btnAlterarStatus.setDisable(false);
+            }catch (Exception e){
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
+            }
+
         }));
 
         btnFechar.setOnAction((event -> {

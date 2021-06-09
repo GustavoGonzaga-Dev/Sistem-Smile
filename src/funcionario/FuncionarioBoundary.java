@@ -132,37 +132,43 @@ public class FuncionarioBoundary extends Application {
         });
 
         btnPesq.setOnAction((e) -> {
-            Funcionario Fn = control.pesquisarPorCodigo(Long.parseLong(txtCodigo.getText()));
-            this.entityToBoundary(Fn);
-            if (Fn != null && txtCodigo.getText().equals("0")) {
-                txtNome.setEditable(false);
-                txtEmail.setEditable(false);
-                txtConfEmail.setEditable(false);
-                cbPermissao.setDisable(true);
-                txtSenha.setEditable(false);
-                txtConfSenha.setEditable(false);
-                btnAdd.setVisible(false);
-                btnPesq.setVisible(false);
-                txtCodigo.setEditable(false);
-                lblTextoPesq.setVisible(false);
-                btnCancelar.setVisible(true);
-            } else if (Fn != null) {
-                valido = control.validarEmailSenha(txtEmail.getText(), txtConfEmail.getText(), txtSenha.getText(), txtConfSenha.getText());
-                btnPesq.setVisible(false);
-                txtCodigo.setEditable(false);
-                txtNome.setEditable(false);
-                txtEmail.setEditable(false);
-                txtConfEmail.setEditable(false);
-                cbPermissao.setDisable(true);
-                txtSenha.setEditable(false);
-                txtConfSenha.setEditable(false);
-                btnAdd.setVisible(false);
-                btnAlterar.setVisible(true);
-                btnExcluir.setVisible(true);
-                btnCancelar.setVisible(false);
-                lblTextoPesq.setVisible(false);
-                btnCancelar.setVisible(true);
+            try{
+                Funcionario Fn = control.pesquisarPorCodigo(Long.parseLong(txtCodigo.getText()));
+                this.entityToBoundary(Fn);
+                if (Fn != null && txtCodigo.getText().equals("0")) {
+                    txtNome.setEditable(false);
+                    txtEmail.setEditable(false);
+                    txtConfEmail.setEditable(false);
+                    cbPermissao.setDisable(true);
+                    txtSenha.setEditable(false);
+                    txtConfSenha.setEditable(false);
+                    btnAdd.setVisible(false);
+                    btnPesq.setVisible(false);
+                    txtCodigo.setEditable(false);
+                    lblTextoPesq.setVisible(false);
+                    btnCancelar.setVisible(true);
+                } else if (Fn != null) {
+                    valido = control.validarEmailSenha(txtEmail.getText(), txtConfEmail.getText(), txtSenha.getText(), txtConfSenha.getText());
+                    btnPesq.setVisible(false);
+                    txtCodigo.setEditable(false);
+                    txtNome.setEditable(false);
+                    txtEmail.setEditable(false);
+                    txtConfEmail.setEditable(false);
+                    cbPermissao.setDisable(true);
+                    txtSenha.setEditable(false);
+                    txtConfSenha.setEditable(false);
+                    btnAdd.setVisible(false);
+                    btnAlterar.setVisible(true);
+                    btnExcluir.setVisible(true);
+                    btnCancelar.setVisible(false);
+                    lblTextoPesq.setVisible(false);
+                    btnCancelar.setVisible(true);
+                }
+            }catch (Exception ee){
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
             }
+
         });
 
         btnCancelar.setOnAction((e) -> {

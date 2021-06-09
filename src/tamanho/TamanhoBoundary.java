@@ -84,17 +84,22 @@ public class TamanhoBoundary extends Application {
         });
 
         btnPesquisar.setOnAction((e) ->{
-            Tamanho Tm = tamanhoControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
-            this.entityToBoundary(Tm);
-            if(Tm!= null){
-                btnPesquisar.setVisible(false);
-                txtPesquisar.setEditable(false);
-                txtCodigo.setEditable(false);
-                txtTamanho.setEditable(false);
-                btnAdd.setVisible(false);
-                btnAlt.setVisible(true);
-                btnRmv.setVisible(true);
-                btnCan.setVisible(true);
+            try{
+                Tamanho Tm = tamanhoControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
+                this.entityToBoundary(Tm);
+                if(Tm!= null){
+                    btnPesquisar.setVisible(false);
+                    txtPesquisar.setEditable(false);
+                    txtCodigo.setEditable(false);
+                    txtTamanho.setEditable(false);
+                    btnAdd.setVisible(false);
+                    btnAlt.setVisible(true);
+                    btnRmv.setVisible(true);
+                    btnCan.setVisible(true);
+                }
+            }catch (Exception ee){
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
             }
         });
 

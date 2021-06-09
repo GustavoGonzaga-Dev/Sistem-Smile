@@ -84,17 +84,22 @@ public class CategoriaBoundary extends Application {
         });
 
         btnPesquisar.setOnAction((e) ->{
-            Categoria Ct = CategoriaControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
-            this.entityToBoundary(Ct);
-            if(Ct!= null){
-                btnPesquisar.setVisible(false);
-                txtPesquisar.setEditable(false);
-                txtCodigo.setEditable(false);
-                txtCategoria.setEditable(false);
-                btnAdd.setVisible(false);
-                btnAlt.setVisible(true);
-                btnRmv.setVisible(true);
-                btnCan.setVisible(true);
+            try{
+                Categoria Ct = CategoriaControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
+                this.entityToBoundary(Ct);
+                if(Ct!= null){
+                    btnPesquisar.setVisible(false);
+                    txtPesquisar.setEditable(false);
+                    txtCodigo.setEditable(false);
+                    txtCategoria.setEditable(false);
+                    btnAdd.setVisible(false);
+                    btnAlt.setVisible(true);
+                    btnRmv.setVisible(true);
+                    btnCan.setVisible(true);
+                }
+            }catch (Exception ee){
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
             }
         });
 

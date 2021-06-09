@@ -83,17 +83,22 @@ public class MarcaBoundary extends Application {
         });
 
         btnPesquisar.setOnAction((e) ->{
-            Marca Mc = marcaControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
-            this.entityToBoundary(Mc);
-            if(Mc!= null){
-                btnPesquisar.setVisible(false);
-                txtPesquisar.setEditable(false);
-                txtCodigo.setEditable(false);
-                txtNome.setEditable(false);
-                btnAdd.setVisible(false);
-                btnAlt.setVisible(true);
-                btnRmv.setVisible(true);
-                btnCan.setVisible(true);
+            try{
+                Marca Mc = marcaControl.pesquisarPorCodigo(Integer.parseInt(txtPesquisar.getText()));
+                this.entityToBoundary(Mc);
+                if(Mc!= null){
+                    btnPesquisar.setVisible(false);
+                    txtPesquisar.setEditable(false);
+                    txtCodigo.setEditable(false);
+                    txtNome.setEditable(false);
+                    btnAdd.setVisible(false);
+                    btnAlt.setVisible(true);
+                    btnRmv.setVisible(true);
+                    btnCan.setVisible(true);
+                }
+            }catch (Exception ee){
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
             }
         });
 
