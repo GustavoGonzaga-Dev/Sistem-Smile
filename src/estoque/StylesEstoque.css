@@ -1,8 +1,13 @@
 .text-field{
     -fx-min-width: 300;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(251, 156, 88);
 }
-
+.table-row-cell:selected{
+    -fx-background-color:rgb(251, 156, 88) ;
+}
 
 .label{
     -fx-font-size: 10;
+    -fx-text-fill: rgb(151, 34, 17);
 }

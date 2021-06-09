@@ -3,8 +3,6 @@
     -fx-min-width: 100;
     -fx-font-size: 15;
     -fx-text-alignment: center;
-}
-
-.text-field {
-    -fx-min-width: 300;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(251, 156, 88);
 }

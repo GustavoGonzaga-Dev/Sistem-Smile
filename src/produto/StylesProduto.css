@@ -1,6 +1,8 @@
 .text-field{
     -fx-min-width: 500;
     -fx-min-height: 100;
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(251, 156, 88);
 }
 .button{
     -fx-border-color: #750202;

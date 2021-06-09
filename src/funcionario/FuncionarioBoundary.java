@@ -44,6 +44,7 @@ public class FuncionarioBoundary extends Application {
     public void start(Stage stage) throws Exception {
         Pane pPane = new Pane();
         Scene scCeneFuncionario = new Scene(pPane, 500, 330);
+        pPane.getStylesheets().add(FuncionarioBoundary.class.getResource("btnExcluirStyle.css").toExternalForm());
         FuncionarioController.valida(txtCodigo);
         cbPermissao.getItems().addAll(perm);
 
@@ -92,7 +93,7 @@ public class FuncionarioBoundary extends Application {
         btnPesq.relocate(250, 280);
         btnConcluir.relocate(220, 280);
         btnExcluir.relocate(430, 280);
-        btnExcluir.getStylesheets().add(FuncionarioBoundary.class.getResource("btnExcluirStyle.css").toExternalForm());
+        btnExcluir.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
         btnCancelar.relocate(180, 280);
 
         pPane.getChildren().addAll(lblNome, txtNome, lblEmail, txtEmail, lblConfEmail, txtConfEmail, lblCodigo, txtCodigo,

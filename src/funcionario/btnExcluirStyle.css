@@ -1,5 +1,4 @@
-.button{
-    -fx-border-color: #750202;
-    -fx-border-radius: 5;
-    -fx-background-color: #ef6060;
+.text-field{
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(251, 156, 88);
 }

@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,6 +38,7 @@ public class EstoqueBoundary extends Application {
     private CategoriaBoundary categoriaTela = new CategoriaBoundary();
     private TamanhoBoundary tamanhoTela = new TamanhoBoundary();
     private MarcaBoundary marcaTela = new MarcaBoundary();
+    private Alert alertWarn = new Alert(Alert.AlertType.WARNING);
     ProdutoBoundary produtoTela = new ProdutoBoundary();
 
     public int cod;
@@ -152,14 +154,15 @@ public class EstoqueBoundary extends Application {
         }));
 
         btnPesquisar.setOnAction((event -> {
-            cod = Integer.parseInt(txtBusca.getText());
             Stage stageProdutoPesq = new Stage();
             try {
+                cod = Integer.parseInt(txtBusca.getText());
                 produtoTela.start(stageProdutoPesq);
                 produtoTela.pesquisar(cod);
                 stage.close();
             } catch (Exception exception) {
-                exception.printStackTrace();
+                alertWarn.setHeaderText("Não Existe");
+                alertWarn.showAndWait();
             }
 
         }));
