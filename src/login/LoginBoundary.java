@@ -1,6 +1,5 @@
 package login;
 
-import funcionario.FuncionarioBoundary;
 import funcionario.FuncionarioController;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
@@ -41,27 +40,26 @@ public class LoginBoundary extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Pane pPane = new Pane();
+        pPane.getStylesheets().add(LoginBoundary.class.getResource("LoginStyle.css").toExternalForm());
         Scene scCeneLogin = new Scene(pPane, 500, 330);
         adm.admin();
 
         Label lblEmail = new Label("Email:");
         Label lblSenha = new Label("Senha:");
 
-        Image img = new Image(new FileInputStream("img/logoPandaVermelho.png"));
+        Image img = new Image(new FileInputStream("img/logopd3.png"));
         ImageView imgLogo = new ImageView(img);
-        imgLogo.relocate(165, -10);
-        imgLogo.setFitHeight ( 185 );
-        imgLogo.setFitWidth ( 160 );
+        imgLogo.relocate(-25, 15);
+        imgLogo.setFitHeight ( 300 );
+        imgLogo.setFitWidth ( 250 );
 
-        lblEmail.relocate(140, 160);
-        txtEmail.relocate(140, 180);
-        txtEmail.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
+        lblEmail.relocate(240, 90);
+        txtEmail.relocate(240, 110);
 
-        lblSenha.relocate(140, 220);
-        txtSenha.relocate(140, 240);
-        txtSenha.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
+        lblSenha.relocate(240, 150);
+        txtSenha.relocate(240, 170);
 
-        check.relocate(370,243);
+        check.relocate(245,200);
         check.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_val, Boolean new_val)->{
             if(check.isSelected()){
                 password.setText(txtSenha.getText());
@@ -74,10 +72,9 @@ public class LoginBoundary extends Application {
             password.setVisible(false);
         });
         password.setVisible(false);
-        password.relocate(140,240);
-        password.getStylesheets().add(FuncionarioBoundary.class.getResource("Style.css").toExternalForm());
+        password.relocate(240,170);
 
-        btnEntrar.relocate(225, 280);
+        btnEntrar.relocate(325, 250);
 
         pPane.getChildren().addAll(lblEmail, txtEmail, btnEntrar, lblSenha, txtSenha, imgLogo, check, password);
 

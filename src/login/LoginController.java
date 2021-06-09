@@ -9,8 +9,13 @@ public class LoginController {
     private LoginDAO loginDao = new LoginDAOImpl();
 
     public boolean validarLogin(Login Lg) {
-        permissao = (loginDao.validarLogin(Lg));
-        return permissao.contains(Lg.getSenha());
+        try{
+            permissao = (loginDao.validarLogin(Lg));
+            return permissao.contains(Lg.getSenha());
+        }catch (Exception e){
+
+        }
+        return false;
     }
 
     public String getPermissao() {
