@@ -1,0 +1,9 @@
+.text-field {
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(251, 156, 88);
+}
+
+.combo-box-base{
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: rgb(255, 140, 0);
+}

@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import marca.Marca;
+import marca.MarcaBoundary;
 import marca.MarcaController;
 import tamanho.Tamanho;
 import tamanho.TamanhoController;
@@ -60,7 +61,7 @@ public class ProdutoBoundary extends Application {
         BorderPane border = new BorderPane();
         HBox hbox = addBox();
         border.setTop(hbox);
-
+        border.getStylesheets().add(MarcaBoundary.class.getResource("StyleText.css").toExternalForm());
         btnAdicionar.setVisible(true);
         txtNome.setEditable(true);
         txtCodigo.setEditable(true);

@@ -32,6 +32,7 @@ public class MarcaBoundary extends Application {
     @Override
     public void start(Stage Stage) throws Exception {
         Pane pPane = new Pane();
+        pPane.getStylesheets().add(MarcaBoundary.class.getResource("StyleText.css").toExternalForm());
         Scene scCeneMarca = new Scene(pPane, 400, 250);
         MarcaController.valida(txtCodigo,txtPesquisar);
 
